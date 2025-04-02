@@ -50,7 +50,6 @@
       margin-left: 2em;
     }  </style>
   <link rel="stylesheet" href="introMarineHydro_files/libs/revealjs/dist/theme/quarto.css">
-  <link rel="stylesheet" href="styles.css">
   <link href="introMarineHydro_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="introMarineHydro_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="introMarineHydro_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -353,47 +352,48 @@
 </div>
 
 </section>
-<section class="slide level2">
-
-<h3 id="images">Images</h3>
-<div>
-
-</div>
-<div class="quarto-layout-panel" data-layout-ncol="2">
-<div class="quarto-layout-row">
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
-<p><strong>Left Column Text</strong></p>
-<p>This is some text that will be on the left side of the slide.</p>
-</div>
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
-<p><strong>Right Column Image</strong></p>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="sandia.png"></p>
-<figcaption>Surus</figcaption>
-</figure>
-</div>
-</div>
-</div>
-</div>
+<section id="bem-solver-in-julia" class="slide level2">
+<h2><strong>BEM Solver in Julia</strong></h2>
 <div class="columns">
-<div class="column" style="width:70%;">
-<h4 id="differentiable-simulation">Differentiable simulation</h4>
+<div class="column" style="width:50%;">
+<h4 id="key-features"><strong>Key Features</strong></h4>
 <ul>
-<li class="fragment"><span class="math display">\[\frac{\partial f(\mathbf{x})}{\partial \mathbf{x}}\]</span> where <span class="math inline">\(f\)</span> is a simulation model and <span class="math inline">\(x\)</span> is the input.</li>
-<li class="fragment">Useful for optimization &amp; sensitivity analysis.</li>
+<li class="fragment">Julia implementation for hydrodynamics.<br>
+</li>
+<li class="fragment">Simplified &amp; parallelizable (free surface) Green’s function <span class="citation" data-cites="LIANG201880">(<a href="" role="doc-biblioref" onclick="return false;"><strong>LIANG201880?</strong></a>)</span>.<br>
+</li>
+<li class="fragment">First-order gradients via automatic differentiation.<br>
+</li>
+<li class="fragment">GPU-ready influence matrix assembly.<br>
+</li>
 </ul>
-<h4 id="why-use-it">Why use it?</h4>
+</div><div class="column" style="width:50%;">
+<p><img data-src="AddedMass_Result.png" style="width:100.0%"> <strong>Figure</strong>: Non-dimensional added mass for a hemisphere.</p>
+</div></div>
+</section>
+<section id="differentiable-simulation" class="slide level2">
+<h2><strong>Differentiable Simulation</strong></h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<h4 class="smaller" id="core-idea"><strong>Core Idea</strong></h4>
+<div>
 <ul>
-<li class="fragment">Enables gradient-based optimization <span class="citation" data-cites="Smith2023">(<a href="" role="doc-biblioref" onclick="return false;">Smith 2023</a>)</span>.</li>
-<li class="fragment">Provides insights into parameter effects.</li>
+<li class="fragment"><p><span class="math display">\[\frac{\partial f(\mathbf{x})}{\partial \mathbf{x}}\]</span> {where <span class="math inline">\(f\)</span> is a simulation model and <span class="math inline">\(x\)</span> is the input}.<br>
+</p></li>
+<li class="fragment"><p>Useful for optimization &amp; sensitivity analysis.</p></li>
+<li class="fragment"><p>Enables gradient-based optimization <span class="citation" data-cites="Smith2023">(<a href="" role="doc-biblioref" onclick="return false;">Smith 2023</a>)</span>.<br>
+</p></li>
+<li class="fragment"><p>Provides insights into parameter effects.<br>
+</p></li>
 </ul>
-</div><p>::: {.column width=“30%” style=“text-align: center; padding-top: 20%; padding-bottom: 20%;} <img data-src="sandia.png"> <strong>Figure: Sandia logo</strong></p>
 </div>
-<p>::::</p>
+</div><div class="column" style="width:40%;">
+<p><img data-src="sandia.png" style="width:80.0%"><br>
+<strong>Figure</strong>: Sandia logo</p>
+</div></div>
 </section>
 <section id="refs" class="slide level2">
-<h2>References</h2>
+<h2><strong>References</strong></h2>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 <p><img src="sealab.png" style="height: 40px;"></p>
@@ -456,7 +456,7 @@ Smith, John. 2023. <span>“Advances in Gradient-Based Optimization for Simulati
         progress: true,
 
         // Display the page number of the current slide
-        slideNumber: true,
+        slideNumber: false,
 
         // 'all', 'print', or 'speaker'
         showSlideNumber: 'all',
@@ -561,7 +561,7 @@ Smith, John. 2023. <span>“Advances in Gradient-Based Optimization for Simulati
         previewLinks: false,
 
         // Transition style (none/fade/slide/convex/concave/zoom)
-        transition: 'slide',
+        transition: 'none',
 
         // Transition speed (default/fast/slow)
         transitionSpeed: 'default',

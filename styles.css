@@ -30,7 +30,7 @@
 
 /* Reduce title font size for long titles */
 .reveal h1 {
-    font-size: 1.6em !important; /* Adjust as needed */
+    font-size: 1.3em !important; /* Adjust as needed */
     white-space: normal !important;
     word-wrap: break-word;
     text-align: center;
@@ -39,7 +39,7 @@
 
 /* Ensure authors fit properly */
 .reveal .subtitle {
-    font-size: 1.1em !important;
+    font-size: 1em !important;
     text-align: center;
     margin-top: 10px;
     white-space: normal;
@@ -74,7 +74,59 @@
     margin-right: 20px;
 }
 
-/* Adjust logos for correct size and position */
-.reveal .footer img {
-    height: 35px; /* Adjust size as needed */
+/* General slide content scaling */
+.reveal .slides {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Ensure full slide height is used */
+    max-width: 100vw;
+    overflow: hidden;
+}
+
+/* Auto-scale text dynamically */
+.reveal .slide-content {
+    font-size: min(2vw, 3vh, 20px); /* Adjust font size dynamically */
+    line-height: 1.2;
+    max-height: 80vh; /* Prevent content overflow */
+    overflow-y: auto; /* Enable scrolling if necessary */
+    word-wrap: break-word;
+    text-align: center;
+}
+
+/* Reduce font size for detailed sections */
+.reveal .smaller {
+    font-size: min(1.5vw, 2.5vh, 14px);
+}
+
+/* Ensure headings don't take up too much space */
+.reveal h1, 
+.reveal h2, 
+.reveal h3 {
+    font-size: min(2.5vw, 3vh, 16px);
+}
+
+/* Keep images responsive */
+.reveal img {
+    max-width: 80%;
+    height: auto;
+}
+
+/* Column layout with dynamic scaling */
+.reveal .columns {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+    max-height: 85vh;
+}
+
+.reveal .column {
+    flex: 1;
+    max-height: 85vh;
+    overflow-y: auto;
+    padding: 1rem;
+    text-align: left;
 }

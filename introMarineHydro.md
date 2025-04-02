@@ -9,14 +9,24 @@ subtitle: "**Kapil Khanal$^{1,2}$, Carlos A. Michelén Ströfer$^2$, Matthieu An
 3. Eurobios Mews Labs  
 </small>"
   
-format: revealjs
-transition: slide 
+format: 
+  revealjs:
+     theme: theme.scss
+     margin: 0.1
+     format: 
+      transition: slide
+      width: 1200
+      height: 800
+      slideNumber: true
+      incremental: true
+      controls: true
+      progress: true
+      auto-stretch: true  # Ensures content resizes properly
+      css: styles.css
+editor: visual
 footer: '<img src="sealab.png" style="height: 40px;">'
 colorlinks: true
-auto-stretch: true
-css: styles.css
 slider: true
-slideNumber: true
 incremental: true
 bibliography: references.bib
 title-slide-attributes:
@@ -26,35 +36,51 @@ title-slide-attributes:
   data-background-position: "center 80%"
 ---
 
-### Images
-::: {layout-ncol=2}
-#### Left Column Text
-This is some text that will be on the left side of the slide.
-
-#### Right Column Image
-![Surus](sandia.png)
-:::
-
-
+## **BEM Solver in Julia**
 
 :::: {.columns}
 
-::: {.column width="70%"}
-#### Differentiable simulation 
-- $$\frac{\partial f(\mathbf{x})}{\partial \mathbf{x}}$$ where $f$ is a simulation model and $x$ is the input.
-- Useful for optimization & sensitivity analysis.
-
-#### Why use it?
-- Enables gradient-based optimization [@Smith2023].
-- Provides insights into parameter effects.
+::: {.column width="50%"}
+#### **Key Features**
+- Julia implementation for hydrodynamics.  
+- Simplified & parallelizable (free surface) Green’s function [@LIANG201880].  
+- First-order gradients via automatic differentiation.  
+- GPU-ready influence matrix assembly.  
 :::
 
-::: {.column width="30%" style="text-align: center; padding-top: 20%; padding-bottom: 20%;}
-![](sandia.png)
-**Figure: Sandia logo**
+::: {.column width="50%"}
+![](AddedMass_Result.png){width=100%}
+**Figure**: Non-dimensional added mass for a hemisphere.  
+:::
+
+::::  
+
+---
+
+## **Differentiable Simulation**
+
+:::: {.columns}
+
+::: {.column width="60%"}
+#### **Core Idea** {.smaller}
+::: incremental
+- $$\frac{\partial f(\mathbf{x})}{\partial \mathbf{x}}$$ \small{where $f$ is a simulation model and $x$ is the input}.  
+- Useful for optimization & sensitivity analysis.  
+
+- Enables gradient-based optimization [@Smith2023].  
+- Provides insights into parameter effects.  
+:::
+:::
+
+::: {.column width="40%"}
+![](sandia.png){width=80%}  
+**Figure**: Sandia logo  
 :::
 
 ::::
 
+---
 
-## References {#refs}
+
+
+## **References** {#refs}
