@@ -12,17 +12,19 @@ subtitle: "**Kapil Khanal$^{1,2}$, Carlos A. Michelén Ströfer$^2$, Matthieu An
 format: 
   revealjs:
      theme: theme.scss
-     margin: 0.1
+     styles:
+      - styles.css
+     slide-number: c/t
+     width: 1600
+     height: 900
+     margin: 0.05
+     echo: true
      format: 
       transition: slide
-      width: 1200
-      height: 800
-      slideNumber: true
       incremental: true
       controls: true
       progress: true
       auto-stretch: true  # Ensures content resizes properly
-      css: styles.css
 editor: visual
 footer: '<img src="sealab.png" style="height: 40px;">'
 colorlinks: true
@@ -61,26 +63,31 @@ title-slide-attributes:
 
 :::: {.columns}
 
-::: {.column width="60%"}
-#### **Core Idea** {.smaller}
-::: incremental
-- $$\frac{\partial f(\mathbf{x})}{\partial \mathbf{x}}$$ \small{where $f$ is a simulation model and $x$ is the input}.  
-- Useful for optimization & sensitivity analysis.  
+::: {.column width="70%"}
+##### **Core Idea** {.smaller}
+$$\frac{\partial f(\mathbf{x})}{\partial \mathbf{x}}$$ where $f$ is a simulation model and $x$ is the input.
 
-- Enables gradient-based optimization [@Smith2023].  
-- Provides insights into parameter effects.  
-:::
+* Useful for optimization & sensitivity analysis.  
+* Enables gradient-based optimization.  
+* Provides insights into parameter sensitivities.  
 :::
 
-::: {.column width="40%"}
+::: {.column width="30%"}
 ![](sandia.png){width=80%}  
 **Figure**: Sandia logo  
 :::
 
 ::::
 
----
 
+## MarineHydro.jl
+- supports reverse-mode automatic differentiation (aka backpropagation)
+- automates discrete adjoint method 
+- GPU support (incoming!)
+- 100% Julia implementation for hydrodynamics.
+
+
+## Differentiability Implmentation
 
 
 ## **References** {#refs}

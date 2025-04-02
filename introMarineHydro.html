@@ -28,27 +28,7 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
-    /* CSS for citations */
-    div.csl-bib-body { }
-    div.csl-entry {
-      clear: both;
-      margin-bottom: 0em;
-    }
-    .hanging-indent div.csl-entry {
-      margin-left:2em;
-      text-indent:-2em;
-    }
-    div.csl-left-margin {
-      min-width:2em;
-      float:left;
-    }
-    div.csl-right-inline {
-      margin-left:2em;
-      padding-left:1em;
-    }
-    div.csl-indent {
-      margin-left: 2em;
-    }  </style>
+  </style>
   <link rel="stylesheet" href="introMarineHydro_files/libs/revealjs/dist/theme/quarto.css">
   <link href="introMarineHydro_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="introMarineHydro_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
@@ -374,34 +354,39 @@
 <section id="differentiable-simulation" class="slide level2">
 <h2><strong>Differentiable Simulation</strong></h2>
 <div class="columns">
-<div class="column" style="width:60%;">
-<h4 class="smaller" id="core-idea"><strong>Core Idea</strong></h4>
-<div>
+<div class="column" style="width:70%;">
+<h5 class="smaller" id="core-idea"><strong>Core Idea</strong></h5>
+<p><span class="math display">\[\frac{\partial f(\mathbf{x})}{\partial \mathbf{x}}\]</span> where <span class="math inline">\(f\)</span> is a simulation model and <span class="math inline">\(x\)</span> is the input.</p>
 <ul>
-<li class="fragment"><p><span class="math display">\[\frac{\partial f(\mathbf{x})}{\partial \mathbf{x}}\]</span> {where <span class="math inline">\(f\)</span> is a simulation model and <span class="math inline">\(x\)</span> is the input}.<br>
-</p></li>
-<li class="fragment"><p>Useful for optimization &amp; sensitivity analysis.</p></li>
-<li class="fragment"><p>Enables gradient-based optimization <span class="citation" data-cites="Smith2023">(<a href="" role="doc-biblioref" onclick="return false;">Smith 2023</a>)</span>.<br>
-</p></li>
-<li class="fragment"><p>Provides insights into parameter effects.<br>
-</p></li>
+<li class="fragment">Useful for optimization &amp; sensitivity analysis.<br>
+</li>
+<li class="fragment">Enables gradient-based optimization.<br>
+</li>
+<li class="fragment">Provides insights into parameter sensitivities.<br>
+</li>
 </ul>
-</div>
-</div><div class="column" style="width:40%;">
+</div><div class="column" style="width:30%;">
 <p><img data-src="sandia.png" style="width:80.0%"><br>
 <strong>Figure</strong>: Sandia logo</p>
 </div></div>
+</section>
+<section id="marinehydro.jl" class="slide level2">
+<h2>MarineHydro.jl</h2>
+<ul>
+<li class="fragment">supports reverse-mode automatic differentiation (aka backpropagation)</li>
+<li class="fragment">automates discrete adjoint method</li>
+<li class="fragment">GPU support (incoming!)</li>
+<li class="fragment">100% Julia implementation for hydrodynamics.</li>
+</ul>
+</section>
+<section id="differentiability-implmentation" class="slide level2">
+<h2>Differentiability Implmentation</h2>
 </section>
 <section id="refs" class="slide level2">
 <h2><strong>References</strong></h2>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 <p><img src="sealab.png" style="height: 40px;"></p>
-</div>
-</div>
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
-<div id="ref-Smith2023" class="csl-entry" role="listitem">
-Smith, John. 2023. <span>“Advances in Gradient-Based Optimization for Simulation Models.”</span> <em>Journal of Computational Methods</em> 45 (3): 123–45. <a href="https://doi.org/10.1234/example">https://doi.org/10.1234/example</a>.
 </div>
 </div>
 </section>
@@ -456,7 +441,7 @@ Smith, John. 2023. <span>“Advances in Gradient-Based Optimization for Simulati
         progress: true,
 
         // Display the page number of the current slide
-        slideNumber: false,
+        slideNumber: 'c/t',
 
         // 'all', 'print', or 'speaker'
         showSlideNumber: 'all',
@@ -581,12 +566,12 @@ Smith, John. 2023. <span>“Advances in Gradient-Based Optimization for Simulati
         // The "normal" size of the presentation, aspect ratio will be preserved
         // when the presentation is scaled to fit different resolutions. Can be
         // specified using percentage units.
-        width: 1050,
+        width: 1600,
 
-        height: 700,
+        height: 900,
 
         // Factor of the display size that should remain empty around the content
-        margin: 0.1,
+        margin: 5.0e-2,
 
         math: {
           mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',

@@ -28,6 +28,11 @@
     list-style-type: circle;
 }
 
+.reveal ul li {
+    font-size: 0.3em !important; /* Adjust the size as needed */
+}
+
+
 /* Reduce title font size for long titles */
 .reveal h1 {
     font-size: 1.3em !important; /* Adjust as needed */
@@ -80,19 +85,17 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    height: 100vh; /* Ensure full slide height is used */
-    max-width: 100vw;
-    overflow: hidden;
+    height: 80vh; /* Ensure full slide height is used */
+    max-width: 100vw; /* Prevent overflow */
 }
 
 /* Auto-scale text dynamically */
 .reveal .slide-content {
     font-size: min(2vw, 3vh, 20px); /* Adjust font size dynamically */
-    line-height: 1.2;
+    line-height: 1.2; 
     max-height: 80vh; /* Prevent content overflow */
     overflow-y: auto; /* Enable scrolling if necessary */
-    word-wrap: break-word;
-    text-align: center;
+    word-wrap: break-word; 
 }
 
 /* Reduce font size for detailed sections */
@@ -104,7 +107,7 @@
 .reveal h1, 
 .reveal h2, 
 .reveal h3 {
-    font-size: min(2.5vw, 3vh, 16px);
+    font-size: min(2.5vw, 3vh, 12x);
 }
 
 /* Keep images responsive */
@@ -118,15 +121,24 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 1rem;
-    width: 100%;
-    max-height: 85vh;
+    gap: 1rem; 
 }
 
 .reveal .column {
-    flex: 1;
-    max-height: 85vh;
-    overflow-y: auto;
-    padding: 1rem;
-    text-align: left;
+    flex-grow: 1; 
 }
+
+.smaller {
+    font-size: 0.em;
+}
+
+.reveal .slides {
+    width: 95%;           /* Adjust as needed */
+    height: 80%;
+    max-width: 95%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 15px;       /* Adjust as needed */
+    box-sizing: border-box; /* Include padding in the element's total width and height */
+}
+
