@@ -358,26 +358,33 @@
 <h5 class="smaller" id="core-idea"><strong>Core Idea</strong></h5>
 <p><span class="math display">\[\frac{\partial f(\mathbf{x})}{\partial \mathbf{x}} = \lim_{\delta \mathbf{x} \to 0} \frac{f(\mathbf{x} + \delta \mathbf{x}) - f(\mathbf{x})}{\delta \mathbf{x}}\]</span></p>
 <p>where <span class="math inline">\(f\)</span> is a <em>simulation model</em> and <span class="math inline">\(\mathbf{x}\)</span> is the input parameters.</p>
+<h5 id="differentiation-through-simulation"><strong>Differentiation through simulation</strong></h5>
+<p>Means differentiation through:</p>
 <ul>
-<li class="fragment"><strong>Key Benefits</strong>:
-<ul>
-<li class="fragment"><strong>Optimization</strong>: Integrate into gradient based optimization.</li>
-<li class="fragment"><strong>Sensitivity Analysis</strong>: Understand how changes in inputs affect the simulation output.</li>
-<li class="fragment"><strong>Inverse Design</strong>: Determine the input parameters needed to achieve a desired output.</li>
-</ul></li>
+<li class="fragment">Time integrators<br>
+</li>
+<li class="fragment">Quadrature methods<br>
+</li>
+<li class="fragment">Linear solvers, and nonlinear solvers , Iterative solvers<br>
+</li>
 </ul>
 </div><div class="column" style="width:40%;">
-<pre><code>![](diffsoftware.png){width=120%}</code></pre>
-<p>Figure: Differentiable BEM</p>
+<p><img data-src="diffSolver.png" class="absolute" style="top: 30%; right: -10%; width: 50%; height: 50%; "></p>
 </div></div>
 </section>
 <section id="marinehydro.jl" class="slide level2">
 <h2>MarineHydro.jl</h2>
 <ul>
-<li class="fragment">supports reverse-mode automatic differentiation (aka ==backpropagation==)</li>
-<li class="fragment">automates discrete adjoint method</li>
-<li class="fragment">GPU support (incoming!)</li>
-<li class="fragment">100% Julia implementation for hydrodynamics.</li>
+<li class="fragment"><p>supports reverse-mode automatic differentiation (aka ==backpropagation==)</p></li>
+<li class="fragment"><p>automates discrete adjoint method</p></li>
+<li class="fragment"><p>GPU support (incoming!)</p></li>
+<li class="fragment"><p>100% Julia implementation for hydrodynamics.</p></li>
+<li class="fragment"><p><strong>Key Benefits</strong>:</p>
+<ul>
+<li class="fragment"><strong>Optimization</strong>: Integrate into gradient based optimization.</li>
+<li class="fragment"><strong>Sensitivity Analysis</strong>: Understand how changes in inputs affect the simulation output.</li>
+<li class="fragment"><strong>Inverse Design</strong>: Determine the input parameters needed to achieve a desired output.</li>
+</ul></li>
 </ul>
 </section>
 <section id="discrete-adjoint-method" class="slide level2">

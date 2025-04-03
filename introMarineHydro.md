@@ -69,20 +69,17 @@ $$\frac{\partial f(\mathbf{x})}{\partial \mathbf{x}} = \lim_{\delta \mathbf{x} \
 
 where $f$ is a *simulation model* and $\mathbf{x}$ is the input parameters.
 
-*   **Key Benefits**:
-    *   **Optimization**: Integrate into gradient based optimization.
-    *   **Sensitivity Analysis**: Understand how changes in inputs affect the simulation output.
-    *   **Inverse Design**: Determine the input parameters needed to achieve a desired output.
+##### **Differentiation through simulation**  
+Means differentiation through:  
 
+- Time integrators  
+- Quadrature methods  
+- Linear solvers, and nonlinear solvers , Iterative solvers  
 :::
 
 ::: {.column width="40%"}
-    ![](diffsoftware.png){width=120%}
-
-
-Figure: Differentiable BEM 
+![](diffSolver.png){.absolute top="30%" right="-10%" height="50%" width="50%"} 
 :::
-
 ::::
 
 
@@ -91,6 +88,13 @@ Figure: Differentiable BEM
 - automates discrete adjoint method 
 - GPU support (incoming!)
 - 100% Julia implementation for hydrodynamics.
+
+*   **Key Benefits**:
+    *   **Optimization**: Integrate into gradient based optimization.
+    *   **Sensitivity Analysis**: Understand how changes in inputs affect the simulation output.
+    *   **Inverse Design**: Determine the input parameters needed to achieve a desired output.
+
+
 
 
 ## Discrete Adjoint Method
