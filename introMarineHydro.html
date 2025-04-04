@@ -10,7 +10,7 @@
 <link href="introMarineHydro_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.5.56">
 
-  <title>Differentiable Hydrodynamic Analysis using MarineHydro.jl</title>
+  <title>intromarinehydro</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -28,8 +28,75 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="introMarineHydro_files/libs/revealjs/dist/theme/quarto.css">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="callouts.css">
   <link href="introMarineHydro_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="introMarineHydro_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="introMarineHydro_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -324,104 +391,196 @@
   <div class="reveal">
     <div class="slides">
 
-<section id="title-slide" data-background-image="cornell.png" data-background-opacity="0.4" data-background-position="center 80%" data-background-size="auto" class="quarto-title-block center">
-  <h1 class="title"><p><span style="font-size: .8em;">Differentiable Hydrodynamic Analysis using MarineHydro.jl</span></p></h1>
-  <p class="subtitle"><strong>Kapil Khanal<span class="math inline">\(^{1,2}\)</span>, Carlos A. Michelén Ströfer<span class="math inline">\(^2\)</span>, Matthieu Ancellin<span class="math inline">\(^3\)</span>, Maha Haji<span class="math inline">\(^1\)</span></strong> <br> <small> 1. Cornell University 2. Sandia National Laboratories 3. Eurobios Mews Labs </small></p>
 
-<div class="quarto-title-authors">
+<section>
+<section id="section" class="title-slide slide level1 centeredslide center" data-background-iframe="https://saforem2.github.io/grid-worms-animation/" loading="lazy">
+<h1></h1>
+<div style="background-color: rgba(22,22,22,0.75); border-radius: 10px; text-align:center; padding: 0px; padding-left: 1.5em; padding-right: 1.5em; max-width: min-content; min-width: max-content; margin-left: auto; margin-right: auto; padding-top: 0.2em; padding-bottom: 0.2em; line-height: 1.5em!important;">
+<p><span style="color:#939393; font-size:1.5em; font-weight: bold;">Differentiable Hydrodynamic Analysis</span><br>
+<span style="color:#777777; font-size:1.2em; font-weight: bold;">using <code>MarineHydro.jl</code></span><br>
+<span style="padding-bottom: 0.5rem;"><br>&nbsp;</span><br>
+<span style="color:#bbbbbb;">Kapil Khanal</span><br>
+<span style="color:#888888; font-size:0.9em;">Cornell University</span></p>
 </div>
+<!-- 
+## **BEM Solver in Julia**
 
-</section>
-<section id="bem-solver-in-julia" class="slide level2">
-<h2><strong>BEM Solver in Julia</strong></h2>
-<div class="columns">
-<div class="column" style="width:50%;">
-<h4 id="key-features"><strong>Key Features</strong></h4>
-<ul>
-<li class="fragment">Julia implementation for hydrodynamics.<br>
-</li>
-<li class="fragment">Simplified &amp; parallelizable (free surface) Green’s function <span class="citation" data-cites="LIANG201880">(<a href="" role="doc-biblioref" onclick="return false;"><strong>LIANG201880?</strong></a>)</span>.<br>
-</li>
-<li class="fragment">First-order gradients via automatic differentiation.<br>
-</li>
-<li class="fragment">GPU-ready influence matrix assembly.<br>
-</li>
-</ul>
-</div><div class="column" style="width:50%;">
-<p><img data-src="AddedMass_Result.png" style="width:100.0%"> <strong>Figure</strong>: Non-dimensional added mass for a hemisphere.</p>
-</div></div>
+:::: {.columns}
+
+::: {.column width="50%"}
+#### **Key Features**
+- Julia implementation for hydrodynamics.  
+- Simplified & parallelizable (free surface) Green’s function [@LIANG201880].  
+- First-order gradients via automatic differentiation.  
+- GPU-ready influence matrix assembly.  
+:::
+
+::: {.column width="50%"}
+![](AddedMass_Result.png){width=100%}
+**Figure**: Non-dimensional added mass for a hemisphere.  
+:::
+
+::::   -->
 </section>
 <section id="differentiable-physics-numerical-simulation" class="slide level2">
 <h2><strong>Differentiable (Physics) Numerical Simulation</strong></h2>
 <div class="columns">
-<div class="column" style="width:60%;">
+<div class="column" style="width:50%;">
 <h5 class="smaller" id="core-idea"><strong>Core Idea</strong></h5>
-<p><span class="math display">\[\frac{\partial f(\mathbf{x})}{\partial \mathbf{x}} = \lim_{\delta \mathbf{x} \to 0} \frac{f(\mathbf{x} + \delta \mathbf{x}) - f(\mathbf{x})}{\delta \mathbf{x}}\]</span></p>
-<p>where <span class="math inline">\(f\)</span> is a <em>simulation model</em> and <span class="math inline">\(\mathbf{x}\)</span> is the input parameters.</p>
-<h5 id="differentiation-through-simulation"><strong>Differentiation through simulation</strong></h5>
+<div title="Goal" style="text-align:left;!important">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Goal</strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math display">\[\frac{\partial BEM(\mathbf{x})}{\partial \mathbf{x}} = \lim_{\delta \mathbf{x} \to 0} \frac{BEM(\mathbf{x} + \delta \mathbf{x}) - BEM(\mathbf{x})}{\delta \mathbf{x}}\]</span> where <span class="math inline">\(BEM\)</span> is a <em>hydrodynamic simulation model</em> and <span class="math inline">\(\mathbf{x}\)</span> is the input parameters.</p>
+</div>
+</div>
+</div>
+</div>
+<h5 id="differentiation-through-simulation"><span style="color:#00CCFF;">Differentiation through simulation</span></h5>
 <p>Means differentiation through:</p>
 <ul>
-<li class="fragment">Time integrators<br>
-</li>
+<li class="fragment">Green’s function</li>
 <li class="fragment">Quadrature methods<br>
 </li>
-<li class="fragment">Linear solvers, and nonlinear solvers , Iterative solvers<br>
+<li class="fragment">Linear solvers, and nonlinear solvers, iterative solvers<br>
 </li>
 </ul>
-</div><div class="column" style="width:40%;">
-<p><img data-src="diffSolver.png" class="absolute" style="top: 30%; right: -10%; width: 50%; height: 50%; "></p>
+</div><div class="column" style="width:49%;">
+<p><img data-src="diffSolver.png"></p>
 </div></div>
 </section>
 <section id="marinehydro.jl" class="slide level2">
-<h2>MarineHydro.jl</h2>
+<h2>&lt;MarineHydro.jl</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
 <ul>
-<li class="fragment"><p>supports reverse-mode automatic differentiation (aka ==backpropagation==)</p></li>
+<li class="fragment"><p>supports reverse-mode automatic differentiation (aka backpropagation)</p></li>
 <li class="fragment"><p>automates discrete adjoint method</p></li>
 <li class="fragment"><p>GPU support (incoming!)</p></li>
 <li class="fragment"><p>100% Julia implementation for hydrodynamics.</p></li>
 <li class="fragment"><p><strong>Key Benefits</strong>:</p>
 <ul>
-<li class="fragment"><strong>Optimization</strong>: Integrate into gradient based optimization.</li>
+<li class="fragment"><strong>Design Optimization</strong>: Integrate into gradient based optimization.</li>
 <li class="fragment"><strong>Sensitivity Analysis</strong>: Understand how changes in inputs affect the simulation output.</li>
-<li class="fragment"><strong>Inverse Design</strong>: Determine the input parameters needed to achieve a desired output.</li>
 </ul></li>
 </ul>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="MarineHydro.png"></p>
+<figcaption><strong>Figure</strong>: Arechitecture of MarineHydro.jl</figcaption>
+</figure>
+</div>
+</div></div>
 </section>
 <section id="discrete-adjoint-method" class="slide level2">
 <h2>Discrete Adjoint Method</h2>
 <p><span class="math display">\[
-\begin{aligned}
+\begin{align}
 \min_{\theta, \phi} \quad &amp; J(\phi(\theta), \theta) \\
-\text{subject to} \quad &amp; D(\theta) \phi - S(\theta) b(\theta) = 0,
-\end{aligned}
+\text{subject to} \quad &amp; D(\theta) \phi - S(\theta) b(\theta) = 0 \label{eq_linsys}
+\end{align}
 \]</span></p>
-<p>where <span class="math inline">\(J\)</span> is the cost function, <span class="math inline">\(D\)</span>, <span class="math inline">\(S\)</span> are BEM matrices, and <span class="math inline">\(b\)</span> is the boundary condition. The total derivative of <span class="math inline">\(J\)</span> with respect to <span class="math inline">\(\theta\)</span> is expressed as:</p>
-<p><span class="math display">\[\begin{equation}
-   \frac{d J}{d\theta} = \frac{\partial J}{\partial \theta}  + \left( \frac{\partial J}{\partial \phi} \right )^T \frac{\partial \phi}{\partial \theta}.
-    \label{eq:total}
-\end{equation}\]</span></p>
+<p>where <span class="math inline">\(J\)</span> is the cost function, <span class="math inline">\(D\)</span>, <span class="math inline">\(S\)</span> are BEM matrices, and <span class="math inline">\(b\)</span> is the boundary condition.</p>
+<p>The total derivative of <span class="math inline">\(J\)</span> with respect to <span class="math inline">\(\theta\)</span> is: <span class="math display">\[
+\begin{align}
+\frac{d J}{d\theta} = \frac{\partial J}{\partial \theta}  + \left( \frac{\partial J}{\partial \phi} \right )^T \frac{\partial \phi}{\partial \theta}.
+\end{align}
+\]</span></p>
+<p>To compute <span class="math inline">\(\frac{\partial \phi}{\partial \theta}\)</span>, the linear system (Eq.<span class="math inline">\(\ref{eq_linsys}\)</span>) is perturbed as follows: <span class="math display">\[
+\begin{equation}
+\frac{\partial (D\phi)}{\partial \theta} &amp;= \frac{\partial (Sb)}{\partial \theta} \\
+\end{equation}
+\label{eq:total}
+\]</span></p>
 </section>
 <section class="slide level2">
 
 <p><span class="math display">\[
+\begin{aligned}
+\frac{\partial D}{\partial \theta} \phi + D \frac{\partial \phi}{\partial \theta} &amp;= \frac{\partial S}{\partial \theta} b + S \frac{\partial b}{\partial \theta} \\
+D \frac{\partial \phi}{\partial \theta} &amp;= S \frac{\partial b}{\partial \theta} + b \frac{\partial S}{\partial \theta} - \phi \frac{\partial D}{\partial \theta} \\
+\frac{\partial \phi}{\partial \theta} &amp;= D^{-1} \left( S \frac{\partial b}{\partial \theta} + b \frac{\partial S}{\partial \theta} - \phi \frac{\partial D}{\partial \theta} \right)
+\end{aligned}
+\]</span> Substituting <span class="math inline">\(\frac{\partial \phi}{\partial \theta}\)</span> from Eq.~<span class="math inline">\(\ref{eq:linsys4}\)</span> into Eq.~<span class="math inline">\(\ref{eq:total}\)</span> and grouping terms from left to right <span class="math display">\[
 \begin{align}
      \lambda^T  &amp;= \frac{\partial J}{\partial \phi}  D^{-1}\\
       \lambda^T D  &amp;= \frac{\partial J}{\partial \phi}
 \end{align}
-\]</span> The gradient of <span class="math inline">\(\mathcal{J}\)</span> with respect to <span class="math inline">\(\theta\)</span> is then expressed as: <span class="math display">\[
-\begin{align}
-\frac{\partial J}{\partial \theta} = \frac{\partial \mathcal{J}}{\partial \theta} +  \lambda^T \left( \frac{\partial b}{\partial\theta}S + b\frac{\partial S}{\partial\theta} -  \phi\frac{\partial D}{\partial\theta} \right)
-\end{align}
 \]</span></p>
+<p>This is the adjoint linear solve. The same <span class="math inline">\(D\)</span> matrix is used.</p>
 </section>
-<section id="refs" class="slide level2">
-<h2><strong>References</strong></h2>
+<section id="implicit-differentiation-through-solvers" class="slide level2 incremental">
+<h2>Implicit Differentiation through solvers</h2>
+<p>The gradient of <span class="math inline">\(J\)</span> with respect to <span class="math inline">\(\theta\)</span> is then expressed as: <span class="math display">\[
+\begin{equation}
+\frac{\partial J}{\partial \theta} = \frac{\partial J}{\partial \theta} +  \lambda^T \left( \frac{\partial b}{\partial\theta}S + b\frac{\partial S}{\partial\theta} -  \phi\frac{\partial D}{\partial\theta} \right)
+\label{eq:grad_theta}
+\end{equation}
+\]</span></p>
+<p>All individual partials are computed using Automatic Differentiation in <span class="math inline">\(\ref{eq:grad_theta}\)</span>.</p>
+<ul>
+<li class="fragment"><p>Similar derivation required for all linear and non-linear solves.</p></li>
+<li class="fragment"><p>The adjoint method for all linear solve is automated in MarineHydro.jl.</p></li>
+<li class="fragment"><p>Integral equation linear solve</p></li>
+<li class="fragment"><p>Transfer function linear solve</p></li>
+<li class="fragment"><p>Multibody multidof linear solve</p></li>
+<li class="fragment"><p>Extends to iterative solvers (GMRES, etc.) and nonlinear solvers (Newton, etc.) as well.</p></li>
+</ul>
+</section>
+<section id="comparison-with-finite-differences" class="slide level2 custom-dimensions">
+<h2>Comparison with Finite Differences</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><img data-src="fd_ad_A_w.png" style="width:80.0%"></p>
+</div><div class="column" style="width:50%;">
+<p><img data-src="FD_AD_B_omega.png" style="width:80.0%"></p>
+</div></div>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><img data-src="fd_ad_dmping_radius.png" style="width:80.0%"></p>
+</div><div class="column" style="width:50%;">
+<p><img data-src="analytical_ad_fd.png" style="width:80.0%"></p>
+</div></div>
+</section>
+<section id="using-marinehydro.jl" class="slide level2">
+<h2>using <code>MarineHydro.jl</code></h2>
+<p>import your mesh (we use Capytaine)</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href=""></a><span class="im">using</span> <span class="bu">MarineHydro</span></span>
+<span id="cb1-2"><a href=""></a><span class="im">using</span> <span class="bu">LinearAlgebra</span> </span>
+<span id="cb1-3"><a href=""></a><span class="im">using</span> <span class="bu">PyCall</span></span>
+<span id="cb1-4"><a href=""></a>cpt <span class="op">=</span> <span class="fu">pyimport</span>(<span class="st">"capytaine"</span>)</span>
+<span id="cb1-5"><a href=""></a>radius <span class="op">=</span> <span class="fl">1.0</span> <span class="co">#fixed</span></span>
+<span id="cb1-6"><a href=""></a>resolution <span class="op">=</span> (<span class="fl">14</span>, <span class="fl">14</span>)</span>
+<span id="cb1-7"><a href=""></a>cptmesh <span class="op">=</span> cpt.<span class="fu">mesh_sphere</span>(name<span class="op">=</span><span class="st">"sphere"</span>, radius<span class="op">=</span>radius, center<span class="op">=</span>(<span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>), resolution<span class="op">=</span>resolution) </span>
+<span id="cb1-8"><a href=""></a>cptmesh.<span class="fu">keep_immersed_part</span>(inplace<span class="op">=</span><span class="cn">true</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Load the capytaine mesh and calculate the hydrodynamic coefficients.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb2-1"><a href=""></a><span class="co"># declare it Julia mesh</span></span>
+<span id="cb2-2"><a href=""></a>mesh <span class="op">=</span> <span class="fu">Mesh</span>(cptmesh)  </span>
+<span id="cb2-3"><a href=""></a>ω <span class="op">=</span> <span class="fl">1.03</span></span>
+<span id="cb2-4"><a href=""></a>ζ <span class="op">=</span> [<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">1</span>] <span class="co"># HEAVE: will be more verbose in future iteration. define it again even if defined in Capytaine.</span></span>
+<span id="cb2-5"><a href=""></a>F <span class="op">=</span> <span class="fu">DiffractionForce</span>(mesh,ω,ζ)</span>
+<span id="cb2-6"><a href=""></a>A,B <span class="op">=</span> <span class="fu">calculate_radiation_forces</span>(mesh,ζ,ω)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Calculate gradients of the hydrodynamic coefficients with respect to <span class="math inline">\(\omega\)</span></p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb3-1"><a href=""></a><span class="co"># differentiabilittiy </span></span>
+<span id="cb3-2"><a href=""></a><span class="im">using</span> <span class="bu">Zygote</span></span>
+<span id="cb3-3"><a href=""></a>A_w_grad, <span class="op">=</span> Zygote.<span class="fu">gradient</span>(w <span class="op">-&gt;</span> <span class="fu">calculate_radiation_forces</span>(mesh,ζ,w)[<span class="fl">1</span>],ω)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="references-refs-" class="slide level2">
+<h2><strong>References</strong> {#refs}-</h2>
+<p>slides theme - https://samforeman.me/posts/dope-slides/</p>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 <p><img src="sealab.png" style="height: 40px;"></p>
 </div>
 </div>
-</section>
+</section></section>
     </div>
   </div>
 
@@ -598,12 +757,12 @@
         // The "normal" size of the presentation, aspect ratio will be preserved
         // when the presentation is scaled to fit different resolutions. Can be
         // specified using percentage units.
-        width: 1600,
+        width: 1050,
 
-        height: 900,
+        height: 700,
 
         // Factor of the display size that should remain empty around the content
-        margin: 6.0e-2,
+        margin: 0.1,
 
         math: {
           mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
