@@ -12,25 +12,25 @@ format:
      theme: theme.scss
      css: [styles.css, callouts.css]
      slide-number: c/t
-     format: 
-      transition: slide
-      incremental: true
-      controls: true
-      progress: true
-      auto-stretch: true  # Ensures content resizes properly
-      default-image-extension: svg
-      code-line-numbers: true
-      code-overflow: scroll
-      html-math-method: katex
-      fig-align: center
-      mermaid:
-        theme: neutral
+     transition: slide
+     incremental: true
+     controls: true
+     progress: true
+     auto-stretch: true  # Ensures content resizes properly
+     default-image-extension: svg
+     code-line-numbers: true
+     code-overflow: scroll
+     html-math-method: mathjax
+     fig-align: center
+     mermaid:
+      theme: neutral
 editor: visual
 footer: '<img src="sealab.png" style="height: 40px;">'
 colorlinks: true
 slider: true
 incremental: true
 bibliography: references.bib
+preload-iframes: true
 title-slide-attributes:
   data-background-image: "cornell.png"
   data-background-size: auto
@@ -38,7 +38,7 @@ title-slide-attributes:
   data-background-position: "center 80%"
 ---
 
-# {.title-slide .centeredslide background-iframe="https://saforem2.github.io/grid-worms-animation/" loading="lazy"}
+# {.title-slide .centeredslide background-iframe="waves/index.html" loading="lazy"}
 
 ::: {style="background-color: rgba(22,22,22,0.75); border-radius: 10px; text-align:center; padding: 0px; padding-left: 1.5em; padding-right: 1.5em; max-width: min-content; min-width: max-content; margin-left: auto; margin-right: auto; padding-top: 0.2em; padding-bottom: 0.2em; line-height: 1.5em!important;"}
 <span style="color:#939393; font-size:1.5em; font-weight: bold;">Differentiable Hydrodynamic Analysis</span>  
@@ -90,7 +90,7 @@ Means differentiation through:
 :::
 
 ::: {.column width="49%"}
-![](diffSolver.png)
+![Fig: Differentiable vs Traditional Solver](diffSolver.png)
 :::
 ::::
 
@@ -114,31 +114,43 @@ Means differentiation through:
 
 ::::
 
-## Discrete Adjoint Method
+## Discrete Adjoint Method {.centeredslide}
 
+:::: {.columns}
+
+::: {.column width="55%"}
+::: {.callout-tip title="BIE constrained optimization"}
 $$
 \begin{align}
-\min_{\theta, \phi} \quad & J(\phi(\theta), \theta) \\
+\min_{\theta} \quad & J(\phi(\theta), \theta) \\
 \text{subject to} \quad & D(\theta) \phi - S(\theta) b(\theta) = 0 \label{eq_linsys}
 \end{align}
 $$
-
-where $J$ is the cost function, $D$, $S$ are BEM matrices, and $b$ is the boundary condition.
+:::
+<span class="smaller-font"> where $J$ is the cost function, $D$, $S$ are BEM matrices, and $b$ is the boundary condition.</span>
 
 The total derivative of $J$ with respect to $\theta$ is:
 $$
-\begin{align}
-\frac{d J}{d\theta} = \frac{\partial J}{\partial \theta}  + \left( \frac{\partial J}{\partial \phi} \right )^T \frac{\partial \phi}{\partial \theta}.
-\end{align}
+\frac{dJ}{d\theta} = 
+\underbrace{\textcolor{skyblue}{\frac{\partial J}{\partial \theta}}}_{\textcolor{skyblue}{\text{Direct}}} + 
+\underbrace{\textcolor{orange}{\left( \frac{\partial J}{\partial \phi} \right)^T \frac{\partial \phi}{\partial \theta}}}_{\textcolor{orange}{\text{Indirect}}}
 $$
+:::
 
-To compute $\frac{\partial \phi}{\partial \theta}$, the linear system (Eq.\ref{eq_linsys}) is perturbed as follows:
-$$
-\begin{equation}
+::: {.column width="45%"}
+To compute $\textcolor{orange}{\frac{\partial \phi}{\partial \theta}}$, the linear system should be perturbed:
+\begin{align}
 \frac{\partial (D\phi)}{\partial \theta} &= \frac{\partial (Sb)}{\partial \theta} \\
-\end{equation}
-\label{eq:total}
-$$
+\end{align}
+
+::: {.callout-tip title="Avoid Perturbing Linear System Many Times"}
+- [**Idea**]{.green-text}: Avoid resolving $D(\theta) \phi - S(\theta) b(\theta) = 0$ for every perturbation of $\theta_i \in \mathbb{R}^n$.
+- [**Solution**]{.green-text}: Use the adjoint method to compute $\frac{\partial \phi}{\partial \theta}$.
+:::
+:::
+
+
+::::
 
 
 ---

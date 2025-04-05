@@ -1,0 +1,159 @@
+body {
+  margin: 0;
+  padding: 0;
+  background: skyblue;
+}
+
+.waves {
+  position: fixed;
+  bottom: 50px;
+  left: 0;
+  height: 50vh;
+  width: 100%;
+  
+  &:after {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 0;
+    width: 100%;
+    bottom: -100px;
+    height: 100px;
+    background: dodgerblue;
+  }
+  
+  svg {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+  }
+  
+  use {
+    animation: wavewave 5s cubic-bezier(.55,.5,.45,.5) infinite;
+    fill: dodgerblue;
+    opacity: 0.7;
+  }
+}
+
+.waves.back {
+  z-index: 1;
+  
+  use:nth-child(2) {
+    animation-delay: -4s;
+    animation-duration: 13s;
+  }
+  use:nth-child(3) {
+    animation-delay: -5s;
+    animation-duration: 20s;
+  }
+}
+
+.waves.front {
+  z-index: 3;
+  
+  use:nth-child(2) {
+    animation-delay: -2s;
+    animation-duration: 7s;
+  }
+  use:nth-child(3) {
+    animation-delay: -3s;
+    animation-duration: 10s;
+  }
+}
+
+@keyframes wavewave {
+  0% {
+   transform: translate(-90px);
+  }
+  100% { 
+    transform: translate(85px);
+  }
+}
+
+.boat {
+  @size: 25vw;
+  position: fixed;
+  bottom: 50px;
+  left: 10vw;
+  transition: left 2s ease;
+  z-index: 2;
+  display: inline-block;
+  transform-origin: center bottom;
+  animation: bob 4s ease-in-out alternate infinite;
+  
+  .hull {
+    width: @size;
+    height: @size / 20 * 7;
+    background: firebrick;
+    border-radius: 0 0 @size / 2 @size / 2;
+    border-top: @size / 200 * 3 solid darkred;
+  }
+  
+  .sail1, .sail2 {
+    margin-bottom: @size / 100;
+    display: inline-block;
+  }
+  
+  .sail1 {
+    width: 0px;
+    border-bottom: @size / 20 * 9 solid white;
+    border-left: @size / 20 * 8 solid transparent;
+    margin: 0 @size / 40 @size / 100;
+  }
+  
+  .sail2 {
+    width: 0px;
+    border-bottom: @size / 20 * 11 solid white;
+    border-right: @size / 2 solid transparent;
+  }
+}
+
+@keyframes bob {
+  0% {
+    transform: rotate(-10deg) translateY(0vh);
+  }
+  100% {
+    transform: rotate(8deg) translateY(-20vh);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background: midnightblue;
+  }
+  
+  .waves {
+    &:after {
+      background: royalblue;
+    }
+    use {
+      fill: royalblue;
+    }
+  }
+  
+  .boat {
+    .hull {
+      background: darkred;
+      border-top-color: #600000;
+    }
+    .sail1, .sail2 {
+      border-bottom-color: whitesmoke;
+    }
+  }
+}
+" and js "// Waves CSS thanks to https://codepen.io/goodkatz/pen/LYPGxQz
+
+const boat = document.querySelector('.boat')
+let boatLeft = 10
+
+window.addEventListener('keydown', (e) => {
+  if (e.keyCode === 37 && boatLeft > 5) { // left arrow
+    boatLeft = boatLeft - 5
+    boat.style.left = `${boatLeft}vw`
+  }
+  
+  if (e.keyCode === 39 && boatLeft < 60) { // right arrow
+    boatLeft = boatLeft + 5
+    boat.style.left = `${boatLeft}vw`
+  }
+})

@@ -393,7 +393,7 @@
 
 
 <section>
-<section id="section" class="title-slide slide level1 centeredslide center" data-background-iframe="https://saforem2.github.io/grid-worms-animation/" loading="lazy">
+<section id="section" class="title-slide slide level1 centeredslide center" data-background-iframe="waves/index.html" loading="lazy">
 <h1></h1>
 <div style="background-color: rgba(22,22,22,0.75); border-radius: 10px; text-align:center; padding: 0px; padding-left: 1.5em; padding-right: 1.5em; max-width: min-content; min-width: max-content; margin-left: auto; margin-right: auto; padding-top: 0.2em; padding-bottom: 0.2em; line-height: 1.5em!important;">
 <p><span style="color:#939393; font-size:1.5em; font-weight: bold;">Differentiable Hydrodynamic Analysis</span><br>
@@ -452,7 +452,12 @@
 </li>
 </ul>
 </div><div class="column" style="width:49%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
 <p><img data-src="diffSolver.png"></p>
+<figcaption>Fig: Differentiable vs Traditional Solver</figcaption>
+</figure>
+</div>
 </div></div>
 </section>
 <section id="marinehydro.jl" class="slide level2">
@@ -479,26 +484,59 @@
 </div>
 </div></div>
 </section>
-<section id="discrete-adjoint-method" class="slide level2">
+<section id="discrete-adjoint-method" class="slide level2 centeredslide">
 <h2>Discrete Adjoint Method</h2>
+<div class="columns">
+<div class="column" style="width:55%;">
+<div title="BIE constrained optimization">
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>BIE constrained optimization</strong></p>
+</div>
+<div class="callout-content">
 <p><span class="math display">\[
 \begin{align}
-\min_{\theta, \phi} \quad &amp; J(\phi(\theta), \theta) \\
+\min_{\theta} \quad &amp; J(\phi(\theta), \theta) \\
 \text{subject to} \quad &amp; D(\theta) \phi - S(\theta) b(\theta) = 0 \label{eq_linsys}
 \end{align}
 \]</span></p>
-<p>where <span class="math inline">\(J\)</span> is the cost function, <span class="math inline">\(D\)</span>, <span class="math inline">\(S\)</span> are BEM matrices, and <span class="math inline">\(b\)</span> is the boundary condition.</p>
+</div>
+</div>
+</div>
+</div>
+<p><span class="smaller-font"> where <span class="math inline">\(J\)</span> is the cost function, <span class="math inline">\(D\)</span>, <span class="math inline">\(S\)</span> are BEM matrices, and <span class="math inline">\(b\)</span> is the boundary condition.</span></p>
 <p>The total derivative of <span class="math inline">\(J\)</span> with respect to <span class="math inline">\(\theta\)</span> is: <span class="math display">\[
-\begin{align}
-\frac{d J}{d\theta} = \frac{\partial J}{\partial \theta}  + \left( \frac{\partial J}{\partial \phi} \right )^T \frac{\partial \phi}{\partial \theta}.
-\end{align}
+\frac{dJ}{d\theta} =
+\underbrace{\textcolor{skyblue}{\frac{\partial J}{\partial \theta}}}_{\textcolor{skyblue}{\text{Direct}}} +
+\underbrace{\textcolor{orange}{\left( \frac{\partial J}{\partial \phi} \right)^T \frac{\partial \phi}{\partial \theta}}}_{\textcolor{orange}{\text{Indirect}}}
 \]</span></p>
-<p>To compute <span class="math inline">\(\frac{\partial \phi}{\partial \theta}\)</span>, the linear system (Eq.<span class="math inline">\(\ref{eq_linsys}\)</span>) is perturbed as follows: <span class="math display">\[
-\begin{equation}
+</div><div class="column" style="width:45%;">
+<p>To compute <span class="math inline">\(\textcolor{orange}{\frac{\partial \phi}{\partial \theta}}\)</span>, the linear system should be perturbed: <span class="math display">\[\begin{align}
 \frac{\partial (D\phi)}{\partial \theta} &amp;= \frac{\partial (Sb)}{\partial \theta} \\
-\end{equation}
-\label{eq:total}
-\]</span></p>
+\end{align}\]</span></p>
+<div title="Avoid Perturbing Linear System Many Times">
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Avoid Perturbing Linear System Many Times</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li class="fragment"><span class="green-text"><strong>Idea</strong></span>: Avoid resolving <span class="math inline">\(D(\theta) \phi - S(\theta) b(\theta) = 0\)</span> for every perturbation of <span class="math inline">\(\theta_i \in \mathbb{R}^n\)</span>.</li>
+<li class="fragment"><span class="green-text"><strong>Solution</strong></span>: Use the adjoint method to compute <span class="math inline">\(\frac{\partial \phi}{\partial \theta}\)</span>.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div></div>
 </section>
 <section class="slide level2">
 
@@ -605,7 +643,7 @@ D \frac{\partial \phi}{\partial \theta} &amp;= S \frac{\partial b}{\partial \the
       // Full list of configuration options available at:
       // https://revealjs.com/config/
       Reveal.initialize({
-'controlsAuto': true,
+'controlsAuto': false,
 'previewLinksAuto': false,
 'pdfSeparateFragments': false,
 'autoAnimateEasing': "ease",
@@ -615,7 +653,7 @@ D \frac{\partial \phi}{\partial \theta} &amp;= S \frac{\partial b}{\partial \the
 'smaller': false,
  
         // Display controls in the bottom right corner
-        controls: false,
+        controls: true,
 
         // Help the user learn the controls by providing hints, for example by
         // bouncing the down arrow when they first encounter a vertical slide
@@ -703,7 +741,7 @@ D \frac{\partial \phi}{\partial \theta} &amp;= S \frac{\partial b}{\partial \the
         autoPlayMedia: null,
 
         // Global override for preloading lazy-loaded iframes (null/true/false)
-        preloadIframes: null,
+        preloadIframes: true,
 
         // Number of milliseconds between automatically proceeding to the
         // next slide, disabled when set to 0, this value can be overwritten
@@ -737,7 +775,7 @@ D \frac{\partial \phi}{\partial \theta} &amp;= S \frac{\partial b}{\partial \the
         previewLinks: false,
 
         // Transition style (none/fade/slide/convex/concave/zoom)
-        transition: 'none',
+        transition: 'slide',
 
         // Transition speed (default/fast/slow)
         transitionSpeed: 'default',
@@ -765,7 +803,7 @@ D \frac{\partial \phi}{\partial \theta} &amp;= S \frac{\partial b}{\partial \the
         margin: 0.1,
 
         math: {
-          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js',
           config: 'TeX-AMS_HTML-full',
           tex2jax: {
             inlineMath: [['\\(','\\)']],
