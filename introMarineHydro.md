@@ -53,36 +53,16 @@ title-slide-attributes:
 </div>
 :::
 
-<!-- 
-## **BEM Solver in Julia**
-
-:::: {.columns}
-
-::: {.column width="50%"}
-#### **Key Features**
-- Julia implementation for hydrodynamics.  
-- Simplified & parallelizable (free surface) Green’s function [@LIANG201880].  
-- First-order gradients via automatic differentiation.  
-- GPU-ready influence matrix assembly.  
-:::
-
-::: {.column width="50%"}
-![](AddedMass_Result.png){width=100%}
-**Figure**: Non-dimensional added mass for a hemisphere.  
-:::
-
-::::   -->
-
 ---
 
 
-## $\partial$ifferentiable BEM Solver
+## Sensitivity of the hydrodynamics simulation
 :::: {.columns}
 ::: {.column width="60%"}
 
-::: {.callout-note title="Goal" style="text-align:left;!important"}
-$$\frac{\partial BEM(\mathbf{x})}{\partial \mathbf{x}} = \lim_{\delta \mathbf{x} \to 0} \frac{BEM(\mathbf{x} + \delta \mathbf{x}) - BEM(\mathbf{x})}{\delta \mathbf{x}}$$
-where $BEM$ is a *hydrodynamic simulation model* and $\mathbf{x}$ is the input parameters.
+::: {.callout-note title="Goal: Calculate Coefficient and Sensitivity" style="text-align:left;!important"}
+$$\left [\mathcal{F}(\mathbf{\theta}) ,\frac{\partial \mathcal{F}(\mathbf{\theta})}{\partial \mathbf{\theta}} \right ] $$
+where $\mathcal{F}$ is a *hydrodynamic simulation model, usually BEM* and $\mathbf{\theta}$ is the input parameters.
 :::
 
 ::: {#fig}
@@ -91,22 +71,20 @@ where $BEM$ is a *hydrodynamic simulation model* and $\mathbf{x}$ is the input p
 :::
 
 ::: {.column width="40%"}
-##### <span style="color:#00CCFF;">Differentiation through simulation</span> 
+##### Currently
 
-Need to differentiate through the following:
+$$\lim_{\delta \mathbf{\theta} \to 0} \frac{\mathcal{F}(\mathbf{\theta} + \delta \mathbf{\theta}) - \mathcal{F}(\mathbf{\theta})}{\delta \mathbf{\theta}}$$
 
-- Green's function : $G(x,\xi)$ , $\nabla G(x,\xi)$ 
+##### Instead
+Differentiable BEM has to differentiate through all operation:
 
-- Quadrature methods  : $\iint_{\xi} G(x,\xi) dA$, $\int_{\xi} \nabla G(x,\xi) dA$ 
-
-- Linear solvers, and nonlinear solvers, iterative solvers: 
-$f(x,u)=0$ 
-
+* Green's function and integrals: $G(x,\xi)$ , $\nabla G(x,\xi)$, $\iint G(x,\xi) dA$ 
+* Iterative (direct) solvers ($f(x,u)=0$ ) and post-processing steps
 :::
 ::::
 
 
-## Discrete Adjoint Method {.centeredslide}
+## Differentiability via Discrete Adjoint Method {.centeredslide}
 
 :::: {.columns}
 
@@ -182,12 +160,11 @@ $$
 \end{equation}
 $$
 
-All individual partials are computed using Automatic Differentiation in $\ref{eq:grad_theta}$. 
+All individual partials are computed using Automatic Differentiation. 
 
 
 - Similar derivation required for all linear and non-linear solves.
-- The adjoint method for all linear solve is automated in MarineHydro.jl.
-
+- Implicit Differentiation at the solution.
 * Multibody multidof linear solve
 * Transfer function 
 * Extends to iterative solvers (GMRES, etc.) and nonlinear solvers (Newton, etc.) as well.
@@ -196,8 +173,8 @@ All individual partials are computed using Automatic Differentiation in $\ref{eq
 :::: {.columns}
 ::: {.column width="50%"}
 - supports reverse-mode automatic differentiation (aka backpropagation)
-- automates discrete adjoint method 
-- GPU support (incoming!)
+- The adjoint method for all linear solve is <code>automated</code> in MarineHydro.jl.
+- GPU support (Matthieu!)
 - 100% Julia implementation for hydrodynamics.
 
 *   **Key Benefits**:
@@ -206,12 +183,12 @@ All individual partials are computed using Automatic Differentiation in $\ref{eq
 :::
 
 ::: {.column width="50%"}
-![**Figure**: Architecture of MarineHydro.jl](diffBEM.png){width=10in height=6in }
+![**Figure**: Architecture of MarineHydro.jl](diffBEM.png){width=10in height=5in }
 :::
 
 ::::
 
-## Comparison with Finite Differences {.custom-dimensions}
+## Comparison with Finite Differences and Analytical Gradients {.custom-dimensions}
 ::: {.columns}
 ::: {.column width="50%" .fragment}
 ![](fd_ad_A_w.png){width=80%}

@@ -426,41 +426,22 @@
 <p><img src="cornell.png" style="height: 100px;"></p>
 </div>
 </div>
-<!-- 
-## **BEM Solver in Julia**
-
-:::: {.columns}
-
-::: {.column width="50%"}
-#### **Key Features**
-- Julia implementation for hydrodynamics.  
-- Simplified & parallelizable (free surface) Green’s function [@LIANG201880].  
-- First-order gradients via automatic differentiation.  
-- GPU-ready influence matrix assembly.  
-:::
-
-::: {.column width="50%"}
-![](AddedMass_Result.png){width=100%}
-**Figure**: Non-dimensional added mass for a hemisphere.  
-:::
-
-::::   -->
 </section>
-<section id="partialifferentiable-bem-solver" class="slide level2">
-<h2><span class="math inline">\(\partial\)</span>ifferentiable BEM Solver</h2>
+<section id="sensitivity-of-the-hydrodynamics-simulation" class="slide level2">
+<h2>Sensitivity of the hydrodynamics simulation</h2>
 <div class="columns">
 <div class="column" style="width:60%;">
-<div title="Goal" style="text-align:left;!important">
+<div title="Goal: Calculate Coefficient and Sensitivity" style="text-align:left;!important">
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<p><strong>Goal</strong></p>
+<p><strong>Goal: Calculate Coefficient and Sensitivity</strong></p>
 </div>
 <div class="callout-content">
-<p><span class="math display">\[\frac{\partial BEM(\mathbf{x})}{\partial \mathbf{x}} = \lim_{\delta \mathbf{x} \to 0} \frac{BEM(\mathbf{x} + \delta \mathbf{x}) - BEM(\mathbf{x})}{\delta \mathbf{x}}\]</span> where <span class="math inline">\(BEM\)</span> is a <em>hydrodynamic simulation model</em> and <span class="math inline">\(\mathbf{x}\)</span> is the input parameters.</p>
+<p><span class="math display">\[\left [\mathcal{F}(\mathbf{\theta}) ,\frac{\partial \mathcal{F}(\mathbf{\theta})}{\partial \mathbf{\theta}} \right ] \]</span> where <span class="math inline">\(\mathcal{F}\)</span> is a <em>hydrodynamic simulation model, usually BEM</em> and <span class="math inline">\(\mathbf{\theta}\)</span> is the input parameters.</p>
 </div>
 </div>
 </div>
@@ -469,17 +450,18 @@
 <p><img data-src="diffSolver.png" style="width:8in;height:2.5in"></p>
 </div>
 </div><div class="column" style="width:40%;">
-<h5 id="differentiation-through-simulation"><span style="color:#00CCFF;">Differentiation through simulation</span></h5>
-<p>Need to differentiate through the following:</p>
+<h5 id="currently">Currently</h5>
+<p><span class="math display">\[\lim_{\delta \mathbf{\theta} \to 0} \frac{\mathcal{F}(\mathbf{\theta} + \delta \mathbf{\theta}) - \mathcal{F}(\mathbf{\theta})}{\delta \mathbf{\theta}}\]</span></p>
+<h5 id="instead">Instead</h5>
+<p>Differentiable BEM has to differentiate through all operation:</p>
 <ul>
-<li class="fragment"><p>Green’s function : <span class="math inline">\(G(x,\xi)\)</span> , <span class="math inline">\(\nabla G(x,\xi)\)</span></p></li>
-<li class="fragment"><p>Quadrature methods : <span class="math inline">\(\iint_{\xi} G(x,\xi) dA\)</span>, <span class="math inline">\(\int_{\xi} \nabla G(x,\xi) dA\)</span></p></li>
-<li class="fragment"><p>Linear solvers, and nonlinear solvers, iterative solvers: <span class="math inline">\(f(x,u)=0\)</span></p></li>
+<li class="fragment">Green’s function and integrals: <span class="math inline">\(G(x,\xi)\)</span> , <span class="math inline">\(\nabla G(x,\xi)\)</span>, <span class="math inline">\(\iint G(x,\xi) dA\)</span></li>
+<li class="fragment">Iterative (direct) solvers (<span class="math inline">\(f(x,u)=0\)</span> ) and post-processing steps</li>
 </ul>
 </div></div>
 </section>
-<section id="discrete-adjoint-method" class="slide level2 centeredslide">
-<h2>Discrete Adjoint Method</h2>
+<section id="differentiability-via-discrete-adjoint-method" class="slide level2 centeredslide">
+<h2>Differentiability via Discrete Adjoint Method</h2>
 <div class="columns">
 <div class="column" style="width:55%;">
 <div title="Constrained optimization">
@@ -562,13 +544,13 @@ D \frac{\partial \phi}{\partial \theta} = S \frac{\partial b}{\partial \theta} +
 \label{eq:grad_theta}
 \end{equation}
 \]</span></p>
-<p>All individual partials are computed using Automatic Differentiation in <span class="math inline">\(\ref{eq:grad_theta}\)</span>.</p>
+<p>All individual partials are computed using Automatic Differentiation.</p>
 <ul>
-<li class="fragment"><p>Similar derivation required for all linear and non-linear solves.</p></li>
-<li class="fragment"><p>The adjoint method for all linear solve is automated in MarineHydro.jl.</p></li>
-<li class="fragment"><p>Multibody multidof linear solve</p></li>
-<li class="fragment"><p>Transfer function</p></li>
-<li class="fragment"><p>Extends to iterative solvers (GMRES, etc.) and nonlinear solvers (Newton, etc.) as well.</p></li>
+<li class="fragment">Similar derivation required for all linear and non-linear solves.</li>
+<li class="fragment">Implicit Differentiation at the solution.</li>
+<li class="fragment">Multibody multidof linear solve</li>
+<li class="fragment">Transfer function</li>
+<li class="fragment">Extends to iterative solvers (GMRES, etc.) and nonlinear solvers (Newton, etc.) as well.</li>
 </ul>
 </section>
 <section id="marinehydro.jl" class="slide level2">
@@ -577,8 +559,8 @@ D \frac{\partial \phi}{\partial \theta} = S \frac{\partial b}{\partial \theta} +
 <div class="column" style="width:50%;">
 <ul>
 <li class="fragment"><p>supports reverse-mode automatic differentiation (aka backpropagation)</p></li>
-<li class="fragment"><p>automates discrete adjoint method</p></li>
-<li class="fragment"><p>GPU support (incoming!)</p></li>
+<li class="fragment"><p>The adjoint method for all linear solve is <code>automated</code> in MarineHydro.jl.</p></li>
+<li class="fragment"><p>GPU support (Matthieu!)</p></li>
 <li class="fragment"><p>100% Julia implementation for hydrodynamics.</p></li>
 <li class="fragment"><p><strong>Key Benefits</strong>:</p>
 <ul>
@@ -589,14 +571,14 @@ D \frac{\partial \phi}{\partial \theta} = S \frac{\partial b}{\partial \theta} +
 </div><div class="column" style="width:50%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="diffBEM.png" style="width:10in;height:6in"></p>
+<p><img data-src="diffBEM.png" style="width:10in;height:5in"></p>
 <figcaption><strong>Figure</strong>: Architecture of MarineHydro.jl</figcaption>
 </figure>
 </div>
 </div></div>
 </section>
-<section id="comparison-with-finite-differences" class="slide level2 custom-dimensions">
-<h2>Comparison with Finite Differences</h2>
+<section id="comparison-with-finite-differences-and-analytical-gradients" class="slide level2 custom-dimensions">
+<h2>Comparison with Finite Differences and Analytical Gradients</h2>
 <div class="columns">
 <div class="column fragment" style="width:50%;">
 <p><img data-src="fd_ad_A_w.png" style="width:80.0%"></p>
