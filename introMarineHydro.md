@@ -22,10 +22,10 @@ format:
      code-overflow: scroll
      html-math-method: mathjax
      fig-align: center
+     footer: '<img src="sealab.png" style="height: 30px; float: right;">'
      mermaid:
       theme: neutral
 editor: visual
-footer: '<img src="sealab.png" style="height: 40px;">'
 colorlinks: true
 slider: true
 incremental: true
@@ -40,12 +40,17 @@ title-slide-attributes:
 
 # {.title-slide .centeredslide background-iframe="waves/index.html" loading="lazy"}
 
-::: {style="background-color: rgba(22,22,22,0.75); border-radius: 10px; text-align:center; padding: 0px; padding-left: 1.5em; padding-right: 1.5em; max-width: min-content; min-width: max-content; margin-left: auto; margin-right: auto; padding-top: 0.2em; padding-bottom: 0.2em; line-height: 1.5em!important;"}
-<span style="color:#939393; font-size:1.5em; font-weight: bold;">Differentiable Hydrodynamic Analysis</span>  
-<span style="color:#777777; font-size:1.2em; font-weight: bold;">using <code>MarineHydro.jl</code></span>  
+::: {style="background-color: rgba(119, 202, 240, 0.75); border-radius: 10px; text-align:center; padding: 0px; padding-left: 1.5em; padding-right: 1.5em; max-width: min-content; min-width: max-content; margin-left: auto; margin-right: auto; padding-top: 0.2em; padding-bottom: 0.2em; line-height: 1.5em!important;"}
+<span style="color:#003366; font-size:1.5em; font-weight: bold;">Differentiable Hydrodynamic Analysis</span>  
+<span style="color:#003366; font-size:1.2em; font-weight: bold;">using <code>MarineHydro.jl</code></span>  
 [<br>&nbsp;]{style="padding-bottom: 0.5rem;"}  
-<span style="color:#bbbbbb;">Kapil Khanal</span>  
-<span style="color:#888888; font-size:0.9em;">Cornell University</span>  
+<span style="color:#003366;">Kapil Khanal (PhD Candidate)</span>  
+<span style="color:#003366; font-size:0.9em;">Cornell University</span>  
+
+<!-- Add the Sealab logo below -->
+<div style="margin-top: 1.5rem;">
+  <img src="cornell.png" style="height: 100px;">
+</div>
 :::
 
 <!-- 
@@ -70,56 +75,43 @@ title-slide-attributes:
 
 ---
 
-## **Differentiable (Physics) Numerical Simulation**
 
+## $\partial$ifferentiable BEM Solver
 :::: {.columns}
-::: {.column width="50%"}
-##### **Core Idea** {.smaller}
+::: {.column width="60%"}
 
 ::: {.callout-note title="Goal" style="text-align:left;!important"}
 $$\frac{\partial BEM(\mathbf{x})}{\partial \mathbf{x}} = \lim_{\delta \mathbf{x} \to 0} \frac{BEM(\mathbf{x} + \delta \mathbf{x}) - BEM(\mathbf{x})}{\delta \mathbf{x}}$$
 where $BEM$ is a *hydrodynamic simulation model* and $\mathbf{x}$ is the input parameters.
 :::
 
+::: {#fig}
+![](diffSolver.png){width=8in height=2.5in }
+:::
+:::
+
+::: {.column width="40%"}
 ##### <span style="color:#00CCFF;">Differentiation through simulation</span> 
-Means differentiation through:  
 
-- Green's function
-- Quadrature methods  
-- Linear solvers, and nonlinear solvers, iterative solvers  
-:::
+Need to differentiate through the following:
 
-::: {.column width="49%"}
-![Fig: Differentiable vs Traditional Solver](diffSolver.png)
+- Green's function : $G(x,\xi)$ , $\nabla G(x,\xi)$ 
+
+- Quadrature methods  : $\iint_{\xi} G(x,\xi) dA$, $\int_{\xi} \nabla G(x,\xi) dA$ 
+
+- Linear solvers, and nonlinear solvers, iterative solvers: 
+$f(x,u)=0$ 
+
 :::
 ::::
 
-
-## <MarineHydro.jl
-:::: {.columns}
-::: {.column width="50%"}
-- supports reverse-mode automatic differentiation (aka backpropagation)
-- automates discrete adjoint method 
-- GPU support (incoming!)
-- 100% Julia implementation for hydrodynamics.
-
-*   **Key Benefits**:
-    *   **Design Optimization**: Integrate into gradient based optimization.
-    *   **Sensitivity Analysis**: Understand how changes in inputs affect the simulation output.
-:::
-
-::: {.column width="50%"}
-![**Figure**: Arechitecture of MarineHydro.jl](MarineHydro.png)
-:::
-
-::::
 
 ## Discrete Adjoint Method {.centeredslide}
 
 :::: {.columns}
 
 ::: {.column width="55%"}
-::: {.callout-tip title="BIE constrained optimization"}
+::: {.callout-tip title="Constrained optimization"}
 $$
 \begin{align}
 \min_{\theta} \quad & J(\phi(\theta), \theta) \\
@@ -154,14 +146,22 @@ To compute $\textcolor{orange}{\frac{\partial \phi}{\partial \theta}}$, the line
 
 
 ---
+Perturb the linear system:
+
 $$
-\begin{aligned}
-\frac{\partial D}{\partial \theta} \phi + D \frac{\partial \phi}{\partial \theta} &= \frac{\partial S}{\partial \theta} b + S \frac{\partial b}{\partial \theta} \\
-D \frac{\partial \phi}{\partial \theta} &= S \frac{\partial b}{\partial \theta} + b \frac{\partial S}{\partial \theta} - \phi \frac{\partial D}{\partial \theta} \\
-\frac{\partial \phi}{\partial \theta} &= D^{-1} \left( S \frac{\partial b}{\partial \theta} + b \frac{\partial S}{\partial \theta} - \phi \frac{\partial D}{\partial \theta} \right)
-\end{aligned}
+\frac{\partial D}{\partial \theta} \phi + D \frac{\partial \phi}{\partial \theta} = \frac{\partial S}{\partial \theta} b + S \frac{\partial b}{\partial \theta}
 $$
-Substituting $\frac{\partial \phi}{\partial \theta}$ from Eq.~\ref{eq:linsys4} into Eq.~\ref{eq:total} and grouping terms from left to right
+
+$$
+D \frac{\partial \phi}{\partial \theta} = S \frac{\partial b}{\partial \theta} + b \frac{\partial S}{\partial \theta} - \phi \frac{\partial D}{\partial \theta}
+$$
+
+$$
+\frac{\partial \phi}{\partial \theta} = D^{-1} \left( S \frac{\partial b}{\partial \theta} + b \frac{\partial S}{\partial \theta} - \phi \frac{\partial D}{\partial \theta} \right)
+$$
+
+
+Substituting $\frac{\partial \phi}{\partial \theta}$ and grouping terms from left to right
 $$
 \begin{align}
      \lambda^T  &= \frac{\partial J}{\partial \phi}  D^{-1}\\
@@ -169,7 +169,8 @@ $$
 \end{align}
 $$
 
-This is the adjoint linear solve. The same $D$ matrix is used.
+* This is the adjoint linear solve. The same $D$ matrix is used.
+
 
 ## Implicit Differentiation through solvers {.incremental}
 
@@ -187,27 +188,44 @@ All individual partials are computed using Automatic Differentiation in $\ref{eq
 - Similar derivation required for all linear and non-linear solves.
 - The adjoint method for all linear solve is automated in MarineHydro.jl.
 
-* Integral equation linear solve
-* Transfer function linear solve
 * Multibody multidof linear solve
+* Transfer function 
 * Extends to iterative solvers (GMRES, etc.) and nonlinear solvers (Newton, etc.) as well.
 
+## MarineHydro.jl
+:::: {.columns}
+::: {.column width="50%"}
+- supports reverse-mode automatic differentiation (aka backpropagation)
+- automates discrete adjoint method 
+- GPU support (incoming!)
+- 100% Julia implementation for hydrodynamics.
+
+*   **Key Benefits**:
+    *   **Design Optimization**: Integrate into gradient based optimization.
+    *   **Sensitivity Analysis**: Understand how changes in inputs affect the simulation output.
+:::
+
+::: {.column width="50%"}
+![**Figure**: Architecture of MarineHydro.jl](diffBEM.png){width=10in height=6in }
+:::
+
+::::
 
 ## Comparison with Finite Differences {.custom-dimensions}
 ::: {.columns}
-::: {.column width="50%"}
+::: {.column width="50%" .fragment}
 ![](fd_ad_A_w.png){width=80%}
 :::
-::: {.column width="50%"}
+::: {.column width="50%" .fragment}
 ![](FD_AD_B_omega.png){width=80%}
 :::
 :::
 
 ::: {.columns}
-::: {.column width="50%"}
+::: {.column width="50%" .fragment}
 ![](fd_ad_dmping_radius.png){width=80%}
 :::
-::: {.column width="50%"}
+::: {.column width="50%" .fragment}
 ![](analytical_ad_fd.png){width=80%}
 :::
 :::
@@ -243,5 +261,6 @@ A_w_grad, = Zygote.gradient(w -> calculate_radiation_forces(mesh,ζ,w)[1],ω)
 ```
 
 
+
 ## **References** {#refs}- 
-slides theme - https://samforeman.me/posts/dope-slides/
+@foreman2024

@@ -93,7 +93,27 @@
     code span.va { color: #111111; } /* Variable */
     code span.vs { color: #20794d; } /* VerbatimString */
     code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
-  </style>
+    /* CSS for citations */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+      margin-bottom: 0em;
+    }
+    .hanging-indent div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }  </style>
   <link rel="stylesheet" href="introMarineHydro_files/libs/revealjs/dist/theme/quarto.css">
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="callouts.css">
@@ -395,12 +415,16 @@
 <section>
 <section id="section" class="title-slide slide level1 centeredslide center" data-background-iframe="waves/index.html" loading="lazy">
 <h1></h1>
-<div style="background-color: rgba(22,22,22,0.75); border-radius: 10px; text-align:center; padding: 0px; padding-left: 1.5em; padding-right: 1.5em; max-width: min-content; min-width: max-content; margin-left: auto; margin-right: auto; padding-top: 0.2em; padding-bottom: 0.2em; line-height: 1.5em!important;">
-<p><span style="color:#939393; font-size:1.5em; font-weight: bold;">Differentiable Hydrodynamic Analysis</span><br>
-<span style="color:#777777; font-size:1.2em; font-weight: bold;">using <code>MarineHydro.jl</code></span><br>
+<div style="background-color: rgba(119, 202, 240, 0.75); border-radius: 10px; text-align:center; padding: 0px; padding-left: 1.5em; padding-right: 1.5em; max-width: min-content; min-width: max-content; margin-left: auto; margin-right: auto; padding-top: 0.2em; padding-bottom: 0.2em; line-height: 1.5em!important;">
+<p><span style="color:#003366; font-size:1.5em; font-weight: bold;">Differentiable Hydrodynamic Analysis</span><br>
+<span style="color:#003366; font-size:1.2em; font-weight: bold;">using <code>MarineHydro.jl</code></span><br>
 <span style="padding-bottom: 0.5rem;"><br>&nbsp;</span><br>
-<span style="color:#bbbbbb;">Kapil Khanal</span><br>
-<span style="color:#888888; font-size:0.9em;">Cornell University</span></p>
+<span style="color:#003366;">Kapil Khanal (PhD Candidate)</span><br>
+<span style="color:#003366; font-size:0.9em;">Cornell University</span></p>
+<!-- Add the Sealab logo below -->
+<div style="margin-top: 1.5rem;">
+<p><img src="cornell.png" style="height: 100px;"></p>
+</div>
 </div>
 <!-- 
 ## **BEM Solver in Julia**
@@ -422,11 +446,10 @@
 
 ::::   -->
 </section>
-<section id="differentiable-physics-numerical-simulation" class="slide level2">
-<h2><strong>Differentiable (Physics) Numerical Simulation</strong></h2>
+<section id="partialifferentiable-bem-solver" class="slide level2">
+<h2><span class="math inline">\(\partial\)</span>ifferentiable BEM Solver</h2>
 <div class="columns">
-<div class="column" style="width:50%;">
-<h5 class="smaller" id="core-idea"><strong>Core Idea</strong></h5>
+<div class="column" style="width:60%;">
 <div title="Goal" style="text-align:left;!important">
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
@@ -442,60 +465,31 @@
 </div>
 </div>
 </div>
+<div id="fig">
+<p><img data-src="diffSolver.png" style="width:8in;height:2.5in"></p>
+</div>
+</div><div class="column" style="width:40%;">
 <h5 id="differentiation-through-simulation"><span style="color:#00CCFF;">Differentiation through simulation</span></h5>
-<p>Means differentiation through:</p>
+<p>Need to differentiate through the following:</p>
 <ul>
-<li class="fragment">Green’s function</li>
-<li class="fragment">Quadrature methods<br>
-</li>
-<li class="fragment">Linear solvers, and nonlinear solvers, iterative solvers<br>
-</li>
+<li class="fragment"><p>Green’s function : <span class="math inline">\(G(x,\xi)\)</span> , <span class="math inline">\(\nabla G(x,\xi)\)</span></p></li>
+<li class="fragment"><p>Quadrature methods : <span class="math inline">\(\iint_{\xi} G(x,\xi) dA\)</span>, <span class="math inline">\(\int_{\xi} \nabla G(x,\xi) dA\)</span></p></li>
+<li class="fragment"><p>Linear solvers, and nonlinear solvers, iterative solvers: <span class="math inline">\(f(x,u)=0\)</span></p></li>
 </ul>
-</div><div class="column" style="width:49%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="diffSolver.png"></p>
-<figcaption>Fig: Differentiable vs Traditional Solver</figcaption>
-</figure>
-</div>
-</div></div>
-</section>
-<section id="marinehydro.jl" class="slide level2">
-<h2>&lt;MarineHydro.jl</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
-<ul>
-<li class="fragment"><p>supports reverse-mode automatic differentiation (aka backpropagation)</p></li>
-<li class="fragment"><p>automates discrete adjoint method</p></li>
-<li class="fragment"><p>GPU support (incoming!)</p></li>
-<li class="fragment"><p>100% Julia implementation for hydrodynamics.</p></li>
-<li class="fragment"><p><strong>Key Benefits</strong>:</p>
-<ul>
-<li class="fragment"><strong>Design Optimization</strong>: Integrate into gradient based optimization.</li>
-<li class="fragment"><strong>Sensitivity Analysis</strong>: Understand how changes in inputs affect the simulation output.</li>
-</ul></li>
-</ul>
-</div><div class="column" style="width:50%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="MarineHydro.png"></p>
-<figcaption><strong>Figure</strong>: Arechitecture of MarineHydro.jl</figcaption>
-</figure>
-</div>
 </div></div>
 </section>
 <section id="discrete-adjoint-method" class="slide level2 centeredslide">
 <h2>Discrete Adjoint Method</h2>
 <div class="columns">
 <div class="column" style="width:55%;">
-<div title="BIE constrained optimization">
+<div title="Constrained optimization">
 <div class="callout callout-tip callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<p><strong>BIE constrained optimization</strong></p>
+<p><strong>Constrained optimization</strong></p>
 </div>
 <div class="callout-content">
 <p><span class="math display">\[
@@ -540,19 +534,25 @@
 </section>
 <section class="slide level2">
 
+<p>Perturb the linear system:</p>
 <p><span class="math display">\[
-\begin{aligned}
-\frac{\partial D}{\partial \theta} \phi + D \frac{\partial \phi}{\partial \theta} &amp;= \frac{\partial S}{\partial \theta} b + S \frac{\partial b}{\partial \theta} \\
-D \frac{\partial \phi}{\partial \theta} &amp;= S \frac{\partial b}{\partial \theta} + b \frac{\partial S}{\partial \theta} - \phi \frac{\partial D}{\partial \theta} \\
-\frac{\partial \phi}{\partial \theta} &amp;= D^{-1} \left( S \frac{\partial b}{\partial \theta} + b \frac{\partial S}{\partial \theta} - \phi \frac{\partial D}{\partial \theta} \right)
-\end{aligned}
-\]</span> Substituting <span class="math inline">\(\frac{\partial \phi}{\partial \theta}\)</span> from Eq.~<span class="math inline">\(\ref{eq:linsys4}\)</span> into Eq.~<span class="math inline">\(\ref{eq:total}\)</span> and grouping terms from left to right <span class="math display">\[
+\frac{\partial D}{\partial \theta} \phi + D \frac{\partial \phi}{\partial \theta} = \frac{\partial S}{\partial \theta} b + S \frac{\partial b}{\partial \theta}
+\]</span></p>
+<p><span class="math display">\[
+D \frac{\partial \phi}{\partial \theta} = S \frac{\partial b}{\partial \theta} + b \frac{\partial S}{\partial \theta} - \phi \frac{\partial D}{\partial \theta}
+\]</span></p>
+<p><span class="math display">\[
+\frac{\partial \phi}{\partial \theta} = D^{-1} \left( S \frac{\partial b}{\partial \theta} + b \frac{\partial S}{\partial \theta} - \phi \frac{\partial D}{\partial \theta} \right)
+\]</span></p>
+<p>Substituting <span class="math inline">\(\frac{\partial \phi}{\partial \theta}\)</span> and grouping terms from left to right <span class="math display">\[
 \begin{align}
      \lambda^T  &amp;= \frac{\partial J}{\partial \phi}  D^{-1}\\
       \lambda^T D  &amp;= \frac{\partial J}{\partial \phi}
 \end{align}
 \]</span></p>
-<p>This is the adjoint linear solve. The same <span class="math inline">\(D\)</span> matrix is used.</p>
+<ul>
+<li class="fragment">This is the adjoint linear solve. The same <span class="math inline">\(D\)</span> matrix is used.</li>
+</ul>
 </section>
 <section id="implicit-differentiation-through-solvers" class="slide level2 incremental">
 <h2>Implicit Differentiation through solvers</h2>
@@ -566,24 +566,47 @@ D \frac{\partial \phi}{\partial \theta} &amp;= S \frac{\partial b}{\partial \the
 <ul>
 <li class="fragment"><p>Similar derivation required for all linear and non-linear solves.</p></li>
 <li class="fragment"><p>The adjoint method for all linear solve is automated in MarineHydro.jl.</p></li>
-<li class="fragment"><p>Integral equation linear solve</p></li>
-<li class="fragment"><p>Transfer function linear solve</p></li>
 <li class="fragment"><p>Multibody multidof linear solve</p></li>
+<li class="fragment"><p>Transfer function</p></li>
 <li class="fragment"><p>Extends to iterative solvers (GMRES, etc.) and nonlinear solvers (Newton, etc.) as well.</p></li>
 </ul>
+</section>
+<section id="marinehydro.jl" class="slide level2">
+<h2>MarineHydro.jl</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li class="fragment"><p>supports reverse-mode automatic differentiation (aka backpropagation)</p></li>
+<li class="fragment"><p>automates discrete adjoint method</p></li>
+<li class="fragment"><p>GPU support (incoming!)</p></li>
+<li class="fragment"><p>100% Julia implementation for hydrodynamics.</p></li>
+<li class="fragment"><p><strong>Key Benefits</strong>:</p>
+<ul>
+<li class="fragment"><strong>Design Optimization</strong>: Integrate into gradient based optimization.</li>
+<li class="fragment"><strong>Sensitivity Analysis</strong>: Understand how changes in inputs affect the simulation output.</li>
+</ul></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="diffBEM.png" style="width:10in;height:6in"></p>
+<figcaption><strong>Figure</strong>: Architecture of MarineHydro.jl</figcaption>
+</figure>
+</div>
+</div></div>
 </section>
 <section id="comparison-with-finite-differences" class="slide level2 custom-dimensions">
 <h2>Comparison with Finite Differences</h2>
 <div class="columns">
-<div class="column" style="width:50%;">
+<div class="column fragment" style="width:50%;">
 <p><img data-src="fd_ad_A_w.png" style="width:80.0%"></p>
-</div><div class="column" style="width:50%;">
+</div><div class="column fragment" style="width:50%;">
 <p><img data-src="FD_AD_B_omega.png" style="width:80.0%"></p>
 </div></div>
 <div class="columns">
-<div class="column" style="width:50%;">
+<div class="column fragment" style="width:50%;">
 <p><img data-src="fd_ad_dmping_radius.png" style="width:80.0%"></p>
-</div><div class="column" style="width:50%;">
+</div><div class="column fragment" style="width:50%;">
 <p><img data-src="analytical_ad_fd.png" style="width:80.0%"></p>
 </div></div>
 </section>
@@ -610,12 +633,17 @@ D \frac{\partial \phi}{\partial \theta} &amp;= S \frac{\partial b}{\partial \the
 <span id="cb3-2"><a href=""></a><span class="im">using</span> <span class="bu">Zygote</span></span>
 <span id="cb3-3"><a href=""></a>A_w_grad, <span class="op">=</span> Zygote.<span class="fu">gradient</span>(w <span class="op">-&gt;</span> <span class="fu">calculate_radiation_forces</span>(mesh,ζ,w)[<span class="fl">1</span>],ω)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="references-refs-" class="slide level2">
+<section id="references-refs-" class="slide level2 smaller scrollable">
 <h2><strong>References</strong> {#refs}-</h2>
-<p>slides theme - https://samforeman.me/posts/dope-slides/</p>
+<p><span class="citation" data-cites="foreman2024">Foreman (<a href="#/references-refs-" role="doc-biblioref" onclick="">2024</a>)</span></p>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
-<p><img src="sealab.png" style="height: 40px;"></p>
+<p><img src="sealab.png" style="height: 30px; float: right;"></p>
+</div>
+</div>
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-foreman2024" class="csl-entry" role="listitem">
+Foreman, Sam. 2024. <span>“How to <span>Make</span> <span>Dope</span> <span>Slides</span>.”</span> August 13, 2024. <a href="https://samforeman.me/posts/dope-slides">https://samforeman.me/posts/dope-slides</a>.
 </div>
 </div>
 </section></section>
