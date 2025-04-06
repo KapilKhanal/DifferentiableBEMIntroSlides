@@ -427,6 +427,43 @@
 </div>
 </div>
 </section>
+<section id="work-collaboration-with-peer-review-pending" class="slide level2 centeredslide">
+<h2>Work collaboration with (peer review pending)</h2>
+<div class="fragment" title="Contributors" style="text-align:left;!important">
+<div class="callout callout-none no-icon callout-titled callout-style-simple">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Contributors</strong></p>
+</div>
+<div class="callout-content">
+<p>Title: <span class="green-text"> <strong>Fully Differentiable Boundary Element Method for Hydrodynamic Sensitivity Analysis of Wave Structure Interaction</strong> </span></p>
+<ul>
+<li class="fragment"><p><strong>Kapil Khanal</strong> (Cornell University)</p></li>
+<li class="fragment"><p><strong>Carlos A. Michelin Strofer</strong> (Sandia National Laboratories)</p></li>
+<li class="fragment"><p><strong>Matthieu Ancellin</strong> (Mews Lab)</p></li>
+<li class="fragment"><p><strong>Maha N Haji</strong> (Cornell University)</p></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="fragment" title="Funding" style="text-align:left;!important">
+<div class="callout callout-none no-icon callout-titled callout-style-simple">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Funding</strong></p>
+</div>
+<div class="callout-content">
+<p>Title: <code>Seedling Grant</code>, Dept. of Energy, Water Power Technologies Office</p>
+<ul>
+<li class="fragment">Phase I</li>
+<li class="fragment">Phase II</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</section>
 <section id="sensitivity-of-the-hydrodynamics-simulation" class="slide level2">
 <h2>Sensitivity of the hydrodynamics simulation</h2>
 <div class="columns">
@@ -441,7 +478,7 @@
 <p><strong>Goal: Calculate Coefficient and Sensitivity</strong></p>
 </div>
 <div class="callout-content">
-<p><span class="math display">\[\left [\mathcal{F}(\mathbf{\theta}) ,\frac{\partial \mathcal{F}(\mathbf{\theta})}{\partial \mathbf{\theta}} \right ] \]</span> where <span class="math inline">\(\mathcal{F}\)</span> is a <em>hydrodynamic simulation model, usually BEM</em> and <span class="math inline">\(\mathbf{\theta}\)</span> is the input parameters.</p>
+<p><span class="math display">\[\left [\mathcal{F}(\mathbf{\theta}) ,\frac{\partial \mathcal{F}(\mathbf{\theta})}{\partial \mathbf{\theta}} \right ] \]</span> where <span class="math inline">\(\mathcal{F}\)</span> is a <em>hydrodynamic simulation model, usually BEM</em> and <span class="math inline">\(\mathbf{\theta} \in \mathbf{R^n}\)</span> is the input parameters.</p>
 </div>
 </div>
 </div>
@@ -547,7 +584,7 @@ D \frac{\partial \phi}{\partial \theta} = S \frac{\partial b}{\partial \theta} +
 <p>All individual partials are computed using Automatic Differentiation.</p>
 <ul>
 <li class="fragment">Similar derivation required for all linear and non-linear solves.</li>
-<li class="fragment">Implicit Differentiation at the solution.</li>
+<li class="fragment">Implicit Differentiation <strong>at the solution</strong>.</li>
 <li class="fragment">Multibody multidof linear solve</li>
 <li class="fragment">Transfer function</li>
 <li class="fragment">Extends to iterative solvers (GMRES, etc.) and nonlinear solvers (Newton, etc.) as well.</li>

@@ -10,6 +10,7 @@
 format: 
   revealjs:
      theme: theme.scss
+     light: cosmo
      css: [styles.css, callouts.css]
      slide-number: c/t
      transition: slide
@@ -55,6 +56,27 @@ title-slide-attributes:
 
 ---
 
+## Work collaboration with (peer review pending)  {.centeredslide}
+::: {.callout title="Contributors" style="text-align:left;!important" .fragment}
+Title: <span class="green-text"> **Fully Differentiable Boundary Element Method for Hydrodynamic Sensitivity Analysis of Wave Structure Interaction** </span>
+
+* **Kapil Khanal** (Cornell University)
+
+* **Carlos A. Michelin Strofer** (Sandia National 
+Laboratories)
+
+* **Matthieu Ancellin** (Mews Lab)
+
+* **Maha N Haji** (Cornell University)
+:::
+
+::: {.callout title="Funding" style="text-align:left;!important" .fragment}
+Title: <code>Seedling Grant</code>, Dept. of Energy, Water Power Technologies Office
+
+- Phase I
+- Phase II
+:::
+
 
 ## Sensitivity of the hydrodynamics simulation
 :::: {.columns}
@@ -62,7 +84,7 @@ title-slide-attributes:
 
 ::: {.callout-note title="Goal: Calculate Coefficient and Sensitivity" style="text-align:left;!important"}
 $$\left [\mathcal{F}(\mathbf{\theta}) ,\frac{\partial \mathcal{F}(\mathbf{\theta})}{\partial \mathbf{\theta}} \right ] $$
-where $\mathcal{F}$ is a *hydrodynamic simulation model, usually BEM* and $\mathbf{\theta}$ is the input parameters.
+where $\mathcal{F}$ is a hydrodynamic simulation model, *usually BEM* and $\mathbf{\theta} \in \mathbf{R^n}$ is the input parameters.
 :::
 
 ::: {#fig}
@@ -164,7 +186,7 @@ All individual partials are computed using Automatic Differentiation.
 
 
 - Similar derivation required for all linear and non-linear solves.
-- Implicit Differentiation at the solution.
+- Implicit Differentiation **at the solution**.
 * Multibody multidof linear solve
 * Transfer function 
 * Extends to iterative solvers (GMRES, etc.) and nonlinear solvers (Newton, etc.) as well.
