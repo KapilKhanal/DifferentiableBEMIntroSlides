@@ -478,7 +478,7 @@
 <p><strong>Goal: Calculate Coefficient and Sensitivity</strong></p>
 </div>
 <div class="callout-content">
-<p><span class="math display">\[\left [\mathcal{F}(\mathbf{\theta}) ,\frac{\partial \mathcal{F}(\mathbf{\theta})}{\partial \mathbf{\theta}} \right ] \]</span> where <span class="math inline">\(\mathcal{F}\)</span> is a <em>hydrodynamic simulation model, usually BEM</em> and <span class="math inline">\(\mathbf{\theta} \in \mathbf{R^n}\)</span> is the input parameters.</p>
+<p><span class="math display">\[\left [\mathcal{F}(\mathbf{\theta}) ,\frac{\partial \mathcal{F}(\mathbf{\theta})}{\partial \mathbf{\theta}} \right ] \]</span> where <span class="math inline">\(\mathcal{F}\)</span> is a hydrodynamic simulation model, <em>usually BEM</em> and <span class="math inline">\(\mathbf{\theta} \in \mathbf{R^n}\)</span> is the input parameters.</p>
 </div>
 </div>
 </div>
@@ -595,11 +595,21 @@ D \frac{\partial \phi}{\partial \theta} = S \frac{\partial b}{\partial \theta} +
 <div class="columns">
 <div class="column" style="width:50%;">
 <ul>
-<li class="fragment"><p>supports reverse-mode automatic differentiation (aka backpropagation)</p></li>
-<li class="fragment"><p>The adjoint method for all linear solve is <code>automated</code> in MarineHydro.jl.</p></li>
-<li class="fragment"><p>GPU support (Matthieu!)</p></li>
-<li class="fragment"><p>100% Julia implementation for hydrodynamics.</p></li>
-<li class="fragment"><p><strong>Key Benefits</strong>:</p>
+<li class="fragment">supports reverse-mode automatic differentiation (aka backpropagation)</li>
+<li class="fragment">The adjoint method for all linear solve is <code>automated</code> in MarineHydro.jl.</li>
+<li class="fragment">GPU support (Matthieu!)</li>
+<li class="fragment">100% Julia implementation for hydrodynamics.</li>
+<li class="fragment"><ul>
+<li class="fragment"><ul>
+<li class="fragment">Capytaine for meshing and geometry</li>
+</ul></li>
+</ul></li>
+<li class="fragment"><ul>
+<li class="fragment"><ul>
+<li class="fragment">Finite difference for geometry</li>
+</ul></li>
+</ul></li>
+<li class="fragment"><strong>Key Benefits</strong>:
 <ul>
 <li class="fragment"><strong>Design Optimization</strong>: Integrate into gradient based optimization.</li>
 <li class="fragment"><strong>Sensitivity Analysis</strong>: Understand how changes in inputs affect the simulation output.</li>
@@ -651,6 +661,14 @@ D \frac{\partial \phi}{\partial \theta} = S \frac{\partial b}{\partial \theta} +
 <div class="sourceCode" id="cb3"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb3-1"><a href=""></a><span class="co"># differentiabilittiy </span></span>
 <span id="cb3-2"><a href=""></a><span class="im">using</span> <span class="bu">Zygote</span></span>
 <span id="cb3-3"><a href=""></a>A_w_grad, <span class="op">=</span> Zygote.<span class="fu">gradient</span>(w <span class="op">-&gt;</span> <span class="fu">calculate_radiation_forces</span>(mesh,ζ,w)[<span class="fl">1</span>],ω)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="ongoing-work" class="slide level2">
+<h2>Ongoing work</h2>
+<ul>
+<li class="fragment"><strong>GPU</strong>: GPU support for the adjoint method and all linear solves.</li>
+<li class="fragment"><strong>Geometry</strong>: Support for meshing in Julia</li>
+<li class="fragment"><strong>Hydrostatics</strong>: Support for hydrostatic analysis</li>
+</ul>
 </section>
 <section id="references-refs-" class="slide level2 smaller scrollable">
 <h2><strong>References</strong> {#refs}-</h2>

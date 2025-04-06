@@ -198,6 +198,8 @@ All individual partials are computed using Automatic Differentiation.
 - The adjoint method for all linear solve is <code>automated</code> in MarineHydro.jl.
 - GPU support (Matthieu!)
 - 100% Julia implementation for hydrodynamics.
+ - - - Capytaine for meshing and geometry
+ - - - Finite difference for geometry
 
 *   **Key Benefits**:
     *   **Design Optimization**: Integrate into gradient based optimization.
@@ -258,6 +260,11 @@ Calculate gradients of the hydrodynamic coefficients with respect to $\omega$
 using Zygote
 A_w_grad, = Zygote.gradient(w -> calculate_radiation_forces(mesh,ζ,w)[1],ω)
 ```
+
+## Ongoing work
+-   **GPU**: GPU support for the adjoint method and all linear solves.
+- **Geometry**: Support for meshing in Julia 
+- **Hydrostatics**: Support for hydrostatic analysis
 
 
 
