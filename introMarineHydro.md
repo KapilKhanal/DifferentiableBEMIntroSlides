@@ -50,7 +50,7 @@ title-slide-attributes:
 
 <!-- Add the Sealab logo below -->
 <div style="margin-top: 1.5rem;">
-  <img src="cornell.png" style="height: 100px;">
+  <img src="Images/cornell.png" style="height: 100px;">
 </div>
 :::
 
@@ -88,7 +88,7 @@ where $\mathcal{F}$ is a hydrodynamic simulation model, *usually BEM* and $\math
 :::
 
 ::: {#fig}
-![](diffSolver.png){width=8in height=2.5in }
+![](Images/diffSolver.png){width=8in height=2.5in }
 :::
 :::
 
@@ -207,7 +207,7 @@ All individual partials are computed using Automatic Differentiation.
 :::
 
 ::: {.column width="50%"}
-![**Figure**: Architecture of MarineHydro.jl](diffBEM.png){width=10in height=5in }
+![**Figure**: Architecture of MarineHydro.jl](Images/diffBEM.png){width=10in height=5in }
 :::
 
 ::::
@@ -215,19 +215,19 @@ All individual partials are computed using Automatic Differentiation.
 ## Comparison with Finite Differences and Analytical Gradients {.custom-dimensions}
 ::: {.columns}
 ::: {.column width="50%" .fragment}
-![](fd_ad_A_w.png){width=80%}
+![](Images/fd_ad_A_w.png){width=80%}
 :::
 ::: {.column width="50%" .fragment}
-![](FD_AD_B_omega.png){width=80%}
+![](Images/FD_AD_B_omega.png){width=80%}
 :::
 :::
 
 ::: {.columns}
 ::: {.column width="50%" .fragment}
-![](fd_ad_dmping_radius.png){width=80%}
+![](Images/fd_ad_dmping_radius.png){width=80%}
 :::
 ::: {.column width="50%" .fragment}
-![](analytical_ad_fd.png){width=80%}
+![](Images/analytical_ad_fd.png){width=80%}
 :::
 :::
 
