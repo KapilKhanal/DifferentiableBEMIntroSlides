@@ -1,9 +1,9 @@
  /* FROM SAM FOREMAN : https://github.com/saforem2*/
 
 :root {
-    --callout-color: #2a2a2a;
-    --callout-title-color: #bdbdbd;
-    --callout-border-hover: #838383;
+    --callout-color: #fffcfc;
+    --callout-title-color: #000101;
+    --callout-border-hover: #6f0fa2;
       /*#FF2052;*/ 
       /*#A9E34C;*/
   }
@@ -14,7 +14,7 @@
     border-radius: 8px!important;
     /* padding-left: 2pt; */
     /* padding-right: 2pt; */
-    background-color: #1c1c1c;
+    background-color: #fffcfc;
     /* box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; */
     /* max-width: min-content + 20px; */
     /* min-width: max-content; */
@@ -31,7 +31,7 @@
     border-radius: 8px!important;
     /* padding-left: 2pt; */
     /* padding-right: 2pt; */
-    background-color: #1c1c1c;
+    background-color: #ffffff;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 10px 30px;
     /* border: 1px solid var(--callout-border-hover)!important; */
     /* max-width: min-content + 20px; */

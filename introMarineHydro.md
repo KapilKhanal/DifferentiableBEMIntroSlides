@@ -23,7 +23,7 @@ format:
      code-overflow: scroll
      html-math-method: mathjax
      fig-align: center
-     footer: '<img src="sealab.png" style="height: 30px; float: right;">'
+     footer: '<img src="Images/sealab.png" style="height: 30px; float: right;">'
      mermaid:
       theme: neutral
 editor: visual
@@ -39,14 +39,14 @@ title-slide-attributes:
   data-background-position: "center 80%"
 ---
 
-# {.title-slide .centeredslide background-iframe="waves/index.html" loading="lazy"}
+# {.title-slide .centeredslide background-iframe="https://saforem2.github.io/grid-worms-animation/" loading="lazy"}
 
-::: {style="background-color: rgba(119, 202, 240, 0.75); border-radius: 10px; text-align:center; padding: 0px; padding-left: 1.5em; padding-right: 1.5em; max-width: min-content; min-width: max-content; margin-left: auto; margin-right: auto; padding-top: 0.2em; padding-bottom: 0.2em; line-height: 1.5em!important;"}
-<span style="color:#003366; font-size:1.5em; font-weight: bold;">Differentiable Hydrodynamic Analysis</span>  
-<span style="color:#003366; font-size:1.2em; font-weight: bold;">using <code>MarineHydro.jl</code></span>  
+::: {style="background-color: rgba(34, 34, 35, 0.75); border-radius: 10px; text-align:center; padding: 0px; padding-left: 1.5em; padding-right: 1.5em; max-width: min-content; min-width: max-content; margin-left: auto; margin-right: auto; padding-top: 0.2em; padding-bottom: 0.2em; line-height: 1.5em!important;"}
+<span style="color:#7EC8E3; font-size:1.11em; font-weight: bold;">Towards $\partial$ifferentiable engineering systems</span>  
+<span style="color:#7EC8E3; font-size:0.9em; font-weight: bold;">Optimizing Coupled Systems with Gradients</span>  
 [<br>&nbsp;]{style="padding-bottom: 0.5rem;"}  
-<span style="color:#003366;">Kapil Khanal (PhD Candidate)</span>  
-<span style="color:#003366; font-size:0.9em;">Cornell University</span>  
+<span style="color:#66B2B2;"> Kapil Khanal (PhD Candidate)</span>  
+<span style="color:#66B2B2; font-size:0.9em;">SEA Lab, Cornell University</span>  
 
 <!-- Add the Sealab logo below -->
 <div style="margin-top: 1.5rem;">
@@ -56,57 +56,170 @@ title-slide-attributes:
 
 ---
 
-## Work collaboration with (peer review pending)  {.centeredslide}
-::: {.callout title="Contributors" style="text-align:left;!important" .fragment}
-Title: <span class="green-text"> **Fully Differentiable Boundary Element Method for Hydrodynamic Sensitivity Analysis of Wave Structure Interaction** </span>
+# Overview
 
-* **Kapil Khanal** (Cornell University)
+1. [Background: `{Coupled Systems}`](#large systems )
+    - [Definition](#Coupled systems optimization)
+    - [Physical system optimization using backpropagation](#automatic-differentiation)
+2. [Differentiable BEM](#sec-diffbem)
+    - - [MarineHydro.jl](#sec-marinehydro)
+3. [Differentiable wave to wire](#sec-codesign)
+    - [Optimal Controls]
+    - [Results](#sec-results)
+3. [References](#sec-references)
+4. [Extras](#sec-extras)
 
-* **Carlos A. Michelin Strofer** (Sandia National 
-Laboratories)
 
-* **Matthieu Ancellin** (Mews Lab)
+## Coupled and Uncoupled Systems {.centeredslide}
 
-* **Maha N Haji** (Cornell University)
+::: {.columns}
+::: {.column width="100%"}
+<span class="green-text"> **"Coupled” refers to mutually beneficial relationships** </span>
+
+- Where different physics interact together.
+- Usually contains many parameters to optimize.
+- Needs scalable analysis and optimization methods.
 :::
 
-::: {.callout title="Funding" style="text-align:left;!important" .fragment}
-Title: <code>Seedling Grant</code>, Dept. of Energy, Water Power Technologies Office
+::: {.column width="110%"}
+<div id="fig" style="margin-top: 20px;">
+![](Images/coupled_uncoupled.png){fig-align="center" width="60%"}
+</div>
 
-- Phase I
-- Phase II
+Both systems on large scale are optimized using backpropagation (a.k.a adjoint methood).
+:::
 :::
 
 
-## Sensitivity of the hydrodynamics simulation
+## System optimization {.centeredslide}
+
 :::: {.columns}
-::: {.column width="60%"}
+::: {.column width="50%"}
+::: {.callout-note title="Optimization of the entire system $(\mathcal{S})$" style="text-align:left; !important"}
+The system can be formulated as:
 
-::: {.callout-note title="Goal: Calculate Coefficient and Sensitivity" style="text-align:left;!important"}
-$$\left [\mathcal{F}(\mathbf{\theta}) ,\frac{\partial \mathcal{F}(\mathbf{\theta})}{\partial \mathbf{\theta}} \right ] $$
-where $\mathcal{F}$ is a hydrodynamic simulation model, *usually BEM* and $\mathbf{\theta} \in \mathbf{R^n}$ is the input parameters.
+$$
+\mathcal{S} = \cup \left\{ \mathcal{R}_{1}(\mathcal{X}), \dots, \mathcal{R}_N(\mathcal{X}) \right\}
+$$
+and the objective function $(LCOE)$ can be minimized as:
+$$
+\min_{\mathcal{X}} LCOE(\mathcal{X})
+$$
+Subject to the following constraints:
+$$
+\begin{aligned}
+    \text{C}_i \quad & \leq 0, \\
+    \text{R}_i(\mathcal{X}) \quad & = 0, \quad i = 1, \dots, N \text{ (disciplines)} \\
+    \text{coupling}: \quad & \mathcal{Y}_i^{t}(\mathcal{X}) = \mathcal{Y}_{j \neq i}^{t}(\mathcal{X}) \quad \text{(consistency)}
+\end{aligned}
+$$
+Where:
+$$
+\mathcal{R} \text{ is the analysis residual of each subsystem.}
+$$
 :::
-
+:::
+::: {.column width="50%"}
+#### Optimizer choice for renewable energy system
 ::: {#fig}
-![](Images/diffSolver.png){width=8in height=2.5in }
+![](Images/compare_lcoe_iterations.png){width=8in height=4.5in }
 :::
 :::
 
+### Issue : Be able to compute the gradient through the entire simulation of the system.
+::::
+
+
+## Differentiable physics simulations {.centeredslide} 
+
+:::: {.columns .fragment}
 ::: {.column width="40%"}
-##### Currently
+::: {.callout-tip title="Differentiable physics simulations" style="text-align:left; !important"}
+<div id="fig">
+![](Images/diffSolver.png){fig-align="center" width=3.in height=1.7in}
+</div>
+:::
+Compute gradients of the physical process (and controls). 
 
-$$\lim_{\delta \mathbf{\theta} \to 0} \frac{\mathcal{F}(\mathbf{\theta} + \delta \mathbf{\theta}) - \mathcal{F}(\mathbf{\theta})}{\delta \mathbf{\theta}}$$
+* Differentiable hydrodynamics numerical solver: <code>MarineHydro.jl</code>.
+* Useful in Wave energy converters (WEC) design optimization for maximum power capture.
 
-##### Instead
-Differentiable BEM has to differentiate through all operation:
+:::
 
-* Green's function and integrals: $G(x,\xi)$ , $\nabla G(x,\xi)$, $\iint G(x,\xi) dA$ 
-* Iterative (direct) solvers ($f(x,u)=0$ ) and post-processing steps
+::: {.column width="60%"}
+<div id="fig">
+![](Images/AdjointOptimization.png){fig-align="center" width="100%"}
+</div>
 :::
 ::::
 
 
-## Differentiability via Discrete Adjoint Method {.centeredslide}
+<!-- ::: {.callout title="" style="text-align:left;!important" .fragment}
+Case study: <code>Wave energy converters (WEC) </code>
+
+- Systems that convert wave energy into usable energy.
+- Coupled systems that include:
+  - Hydrodynamics, Controls, Economics etc
+- Design optimization of WECs is a complex problem.
+- **Goal**: Optimize the design of WECs to maximize energy capture.
+::: -->
+
+
+## MarineHydro.jl - wave model
+:::: {.columns}
+::: {.column width="50%"}
+- Frequency domain boundary element method (BEM) solver for hydrodynamics.
+- Supports reverse-mode automatic differentiation (aka backpropagation)
+- Adjoint method for all linear solve is <code>automated</code> in <code>MarineHydro.jl</code>.
+- 100% Julia implementation.
+- Open-source and extensible.
+
+
+*   **Key Benefits**:
+    *   **Design Optimization**: Integrate into gradient based optimization.
+    *   **Sensitivity Analysis**: Understand how changes in inputs affect the simulation output.
+:::
+
+::: {.column width="50%"}
+![**Figure**: Architecture of MarineHydro.jl](Images/diffBEM.png){width=10in height=5in }
+:::
+::::
+
+## Comparison with Finite Differences and Analytical Gradients {.custom-dimensions}
+::: {.columns}
+::: {.column width="50%" .fragment}
+![](Images/fd_ad_A_w.png){width=80%}
+:::
+::: {.column width="50%" .fragment}
+![](Images/FD_AD_B_omega.png){width=80%}
+:::
+:::
+
+::: {.columns}
+::: {.column width="50%" .fragment}
+![](Images/fd_ad_dmping_radius.png){width=80%}
+:::
+::: {.column width="50%" .fragment}
+![](Images/analytical_ad_fd.png){width=80%}
+:::
+:::
+
+## Diffferentiable Wave to Wire model of WECs {.centeredslide}
+### Wave to wire optimization
+-  wave interaction to electrical power output
+- Time domain modeling of the PTO systems and control strategies
+- For every WEC design, optimal control strategy is computed.
+- Need for a differentiable wave to wire model 
+
+- Adjoint method for the entire wave to wire model 
+
+
+
+
+## **References** {#refs}- 
+@foreman2024
+
+## Backup1: Differentiability via Discrete Adjoint Method {.centeredslide}
 
 :::: {.columns}
 
@@ -190,83 +303,3 @@ All individual partials are computed using Automatic Differentiation.
 * Multibody multidof linear solve
 * Transfer function 
 * Extends to iterative solvers (GMRES, etc.) and nonlinear solvers (Newton, etc.) as well.
-
-## MarineHydro.jl
-:::: {.columns}
-::: {.column width="50%"}
-- supports reverse-mode automatic differentiation (aka backpropagation)
-- The adjoint method for all linear solve is <code>automated</code> in MarineHydro.jl.
-- GPU support (Matthieu!)
-- 100% Julia implementation for hydrodynamics.
- - - - Capytaine for meshing and geometry
- - - - Finite difference for geometry
-
-*   **Key Benefits**:
-    *   **Design Optimization**: Integrate into gradient based optimization.
-    *   **Sensitivity Analysis**: Understand how changes in inputs affect the simulation output.
-:::
-
-::: {.column width="50%"}
-![**Figure**: Architecture of MarineHydro.jl](Images/diffBEM.png){width=10in height=5in }
-:::
-
-::::
-
-## Comparison with Finite Differences and Analytical Gradients {.custom-dimensions}
-::: {.columns}
-::: {.column width="50%" .fragment}
-![](Images/fd_ad_A_w.png){width=80%}
-:::
-::: {.column width="50%" .fragment}
-![](Images/FD_AD_B_omega.png){width=80%}
-:::
-:::
-
-::: {.columns}
-::: {.column width="50%" .fragment}
-![](Images/fd_ad_dmping_radius.png){width=80%}
-:::
-::: {.column width="50%" .fragment}
-![](Images/analytical_ad_fd.png){width=80%}
-:::
-:::
-
-## using <code>MarineHydro.jl</code>
-
-import your mesh (we use Capytaine)
-```julia
-using MarineHydro
-using LinearAlgebra 
-using PyCall
-cpt = pyimport("capytaine")
-radius = 1.0 #fixed
-resolution = (14, 14)
-cptmesh = cpt.mesh_sphere(name="sphere", radius=radius, center=(0, 0, 0), resolution=resolution) 
-cptmesh.keep_immersed_part(inplace=true)
-```
-
-Load the capytaine mesh and calculate the hydrodynamic coefficients.  
-```julia
-# declare it Julia mesh
-mesh = Mesh(cptmesh)  
-ω = 1.03
-ζ = [0,0,1] # HEAVE: will be more verbose in future iteration. define it again even if defined in Capytaine.
-F = DiffractionForce(mesh,ω,ζ)
-A,B = calculate_radiation_forces(mesh,ζ,ω)
-```
-Calculate gradients of the hydrodynamic coefficients with respect to $\omega$
-```julia
-# differentiabilittiy 
-using Zygote
-A_w_grad, = Zygote.gradient(w -> calculate_radiation_forces(mesh,ζ,w)[1],ω)
-```
-
-## Ongoing work
--   **GPU**: GPU support for the adjoint method and all linear solves.
-- **Geometry**: Support for meshing in Julia 
-- **Hydrostatics**: Support for hydrostatic analysis
-
-
-
-## **References** {#refs}- 
-@foreman2024

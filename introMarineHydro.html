@@ -28,71 +28,6 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
-    /* CSS for syntax highlighting */
-    pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { line-height: 1.25; }
-    pre > code.sourceCode > span:empty { height: 1.2em; }
-    .sourceCode { overflow: visible; }
-    code.sourceCode > span { color: inherit; text-decoration: inherit; }
-    div.sourceCode { margin: 1em 0; }
-    pre.sourceCode { margin: 0; }
-    @media screen {
-    div.sourceCode { overflow: auto; }
-    }
-    @media print {
-    pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
-    }
-    pre.numberSource code
-      { counter-reset: source-line 0; }
-    pre.numberSource code > span
-      { position: relative; left: -4em; counter-increment: source-line; }
-    pre.numberSource code > span > a:first-child::before
-      { content: counter(source-line);
-        position: relative; left: -1em; text-align: right; vertical-align: baseline;
-        border: none; display: inline-block;
-        -webkit-touch-callout: none; -webkit-user-select: none;
-        -khtml-user-select: none; -moz-user-select: none;
-        -ms-user-select: none; user-select: none;
-        padding: 0 4px; width: 4em;
-        color: #aaaaaa;
-      }
-    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-    div.sourceCode
-      { color: #003b4f; background-color: #f1f3f5; }
-    @media screen {
-    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-    }
-    code span { color: #003b4f; } /* Normal */
-    code span.al { color: #ad0000; } /* Alert */
-    code span.an { color: #5e5e5e; } /* Annotation */
-    code span.at { color: #657422; } /* Attribute */
-    code span.bn { color: #ad0000; } /* BaseN */
-    code span.bu { } /* BuiltIn */
-    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
-    code span.ch { color: #20794d; } /* Char */
-    code span.cn { color: #8f5902; } /* Constant */
-    code span.co { color: #5e5e5e; } /* Comment */
-    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
-    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
-    code span.dt { color: #ad0000; } /* DataType */
-    code span.dv { color: #ad0000; } /* DecVal */
-    code span.er { color: #ad0000; } /* Error */
-    code span.ex { } /* Extension */
-    code span.fl { color: #ad0000; } /* Float */
-    code span.fu { color: #4758ab; } /* Function */
-    code span.im { color: #00769e; } /* Import */
-    code span.in { color: #5e5e5e; } /* Information */
-    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
-    code span.op { color: #5e5e5e; } /* Operator */
-    code span.ot { color: #003b4f; } /* Other */
-    code span.pp { color: #ad0000; } /* Preprocessor */
-    code span.sc { color: #5e5e5e; } /* SpecialChar */
-    code span.ss { color: #20794d; } /* SpecialString */
-    code span.st { color: #20794d; } /* String */
-    code span.va { color: #111111; } /* Variable */
-    code span.vs { color: #20794d; } /* VerbatimString */
-    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     /* CSS for citations */
     div.csl-bib-body { }
     div.csl-entry {
@@ -413,92 +348,214 @@
 
 
 <section>
-<section id="section" class="title-slide slide level1 centeredslide center" data-background-iframe="waves/index.html" loading="lazy">
+<section id="section" class="title-slide slide level1 centeredslide center" data-background-iframe="https://saforem2.github.io/grid-worms-animation/" loading="lazy">
 <h1></h1>
-<div style="background-color: rgba(119, 202, 240, 0.75); border-radius: 10px; text-align:center; padding: 0px; padding-left: 1.5em; padding-right: 1.5em; max-width: min-content; min-width: max-content; margin-left: auto; margin-right: auto; padding-top: 0.2em; padding-bottom: 0.2em; line-height: 1.5em!important;">
-<p><span style="color:#003366; font-size:1.5em; font-weight: bold;">Differentiable Hydrodynamic Analysis</span><br>
-<span style="color:#003366; font-size:1.2em; font-weight: bold;">using <code>MarineHydro.jl</code></span><br>
+<div style="background-color: rgba(34, 34, 35, 0.75); border-radius: 10px; text-align:center; padding: 0px; padding-left: 1.5em; padding-right: 1.5em; max-width: min-content; min-width: max-content; margin-left: auto; margin-right: auto; padding-top: 0.2em; padding-bottom: 0.2em; line-height: 1.5em!important;">
+<p><span style="color:#7EC8E3; font-size:1.11em; font-weight: bold;">Towards <span class="math inline">\(\partial\)</span>ifferentiable engineering systems</span><br>
+<span style="color:#7EC8E3; font-size:0.9em; font-weight: bold;">Optimizing Coupled Systems with Gradients</span><br>
 <span style="padding-bottom: 0.5rem;"><br>&nbsp;</span><br>
-<span style="color:#003366;">Kapil Khanal (PhD Candidate)</span><br>
-<span style="color:#003366; font-size:0.9em;">Cornell University</span></p>
+<span style="color:#66B2B2;"> Kapil Khanal (PhD Candidate)</span><br>
+<span style="color:#66B2B2; font-size:0.9em;">SEA Lab, Cornell University</span></p>
 <!-- Add the Sealab logo below -->
 <div style="margin-top: 1.5rem;">
 <p><img src="Images/cornell.png" style="height: 100px;"></p>
 </div>
 </div>
 </section>
-<section id="work-collaboration-with-peer-review-pending" class="slide level2 centeredslide">
-<h2>Work collaboration with (peer review pending)</h2>
-<div class="fragment" title="Contributors" style="text-align:left;!important">
-<div class="callout callout-none no-icon callout-titled callout-style-simple">
-<div class="callout-body">
-<div class="callout-title">
-<p><strong>Contributors</strong></p>
-</div>
-<div class="callout-content">
-<p>Title: <span class="green-text"> <strong>Fully Differentiable Boundary Element Method for Hydrodynamic Sensitivity Analysis of Wave Structure Interaction</strong> </span></p>
+<section class="slide level2">
+
+</section></section>
+<section>
+<section id="overview" class="title-slide slide level1 center">
+<h1>Overview</h1>
+<ol type="1">
+<li class="fragment"><a href="#/large%20systems">Background: <code>{Coupled Systems}</code></a>
 <ul>
-<li class="fragment"><p><strong>Kapil Khanal</strong> (Cornell University)</p></li>
-<li class="fragment"><p><strong>Carlos A. Michelin Strofer</strong> (Sandia National Laboratories)</p></li>
-<li class="fragment"><p><strong>Matthieu Ancellin</strong> (Mews Lab)</p></li>
-<li class="fragment"><p><strong>Maha N Haji</strong> (Cornell University)</p></li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-<div class="fragment" title="Funding" style="text-align:left;!important">
-<div class="callout callout-none no-icon callout-titled callout-style-simple">
-<div class="callout-body">
-<div class="callout-title">
-<p><strong>Funding</strong></p>
-</div>
-<div class="callout-content">
-<p>Title: <code>Seedling Grant</code>, Dept. of Energy, Water Power Technologies Office</p>
+<li class="fragment"><a href="#/Coupled%20systems%20optimization">Definition</a></li>
+<li class="fragment"><a href="#/automatic-differentiation">Physical system optimization using backpropagation</a></li>
+</ul></li>
+<li class="fragment"><a href="#/sec-diffbem">Differentiable BEM</a>
 <ul>
-<li class="fragment">Phase I</li>
-<li class="fragment">Phase II</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
+<li class="fragment"><ul>
+<li class="fragment"><a href="#/sec-marinehydro">MarineHydro.jl</a></li>
+</ul></li>
+</ul></li>
+<li class="fragment"><a href="#/sec-codesign">Differentiable wave to wire</a>
+<ul>
+<li class="fragment">[Optimal Controls]</li>
+<li class="fragment"><a href="#/sec-results">Results</a></li>
+</ul></li>
+<li class="fragment"><a href="#/sec-references">References</a></li>
+<li class="fragment"><a href="#/sec-extras">Extras</a></li>
+</ol>
 </section>
-<section id="sensitivity-of-the-hydrodynamics-simulation" class="slide level2">
-<h2>Sensitivity of the hydrodynamics simulation</h2>
+<section id="coupled-and-uncoupled-systems" class="slide level2 centeredslide">
+<h2>Coupled and Uncoupled Systems</h2>
 <div class="columns">
-<div class="column" style="width:60%;">
-<div title="Goal: Calculate Coefficient and Sensitivity" style="text-align:left;!important">
+<div class="column" style="width:100%;">
+<p><span class="green-text"> <strong>“Coupled” refers to mutually beneficial relationships</strong> </span></p>
+<ul>
+<li class="fragment">Where different physics interact together.</li>
+<li class="fragment">Usually contains many parameters to optimize.</li>
+<li class="fragment">Needs scalable analysis and optimization methods.</li>
+</ul>
+</div><div class="column" style="width:110%;">
+<div id="fig" style="margin-top: 20px;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="Images/coupled_uncoupled.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></p>
+</figure>
+</div>
+</div>
+<p>Both systems on large scale are optimized using backpropagation (a.k.a adjoint methood).</p>
+</div></div>
+</section>
+<section id="system-optimization" class="slide level2 centeredslide">
+<h2>System optimization</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div title="Optimization of the entire system $(\mathcal{S})$" style="text-align:left; !important">
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<p><strong>Goal: Calculate Coefficient and Sensitivity</strong></p>
+<p><strong>Optimization of the entire system <span class="math inline">\((\mathcal{S})\)</span></strong></p>
 </div>
 <div class="callout-content">
-<p><span class="math display">\[\left [\mathcal{F}(\mathbf{\theta}) ,\frac{\partial \mathcal{F}(\mathbf{\theta})}{\partial \mathbf{\theta}} \right ] \]</span> where <span class="math inline">\(\mathcal{F}\)</span> is a hydrodynamic simulation model, <em>usually BEM</em> and <span class="math inline">\(\mathbf{\theta} \in \mathbf{R^n}\)</span> is the input parameters.</p>
+<p>The system can be formulated as:</p>
+<p><span class="math display">\[
+\mathcal{S} = \cup \left\{ \mathcal{R}_{1}(\mathcal{X}), \dots, \mathcal{R}_N(\mathcal{X}) \right\}
+\]</span> and the objective function <span class="math inline">\((LCOE)\)</span> can be minimized as: <span class="math display">\[
+\min_{\mathcal{X}} LCOE(\mathcal{X})
+\]</span> Subject to the following constraints: <span class="math display">\[
+\begin{aligned}
+    \text{C}_i \quad &amp; \leq 0, \\
+    \text{R}_i(\mathcal{X}) \quad &amp; = 0, \quad i = 1, \dots, N \text{ (disciplines)} \\
+    \text{coupling}: \quad &amp; \mathcal{Y}_i^{t}(\mathcal{X}) = \mathcal{Y}_{j \neq i}^{t}(\mathcal{X}) \quad \text{(consistency)}
+\end{aligned}
+\]</span> Where: <span class="math display">\[
+\mathcal{R} \text{ is the analysis residual of each subsystem.}
+\]</span></p>
 </div>
 </div>
 </div>
 </div>
+</div><div class="column" style="width:50%;">
+<h4 id="optimizer-choice-for-renewable-energy-system">Optimizer choice for renewable energy system</h4>
 <div id="fig">
-<p><img data-src="Images/diffSolver.png" style="width:8in;height:2.5in"></p>
+<p><img data-src="Images/compare_lcoe_iterations.png" style="width:8in;height:4.5in"></p>
 </div>
-</div><div class="column" style="width:40%;">
-<h5 id="currently">Currently</h5>
-<p><span class="math display">\[\lim_{\delta \mathbf{\theta} \to 0} \frac{\mathcal{F}(\mathbf{\theta} + \delta \mathbf{\theta}) - \mathcal{F}(\mathbf{\theta})}{\delta \mathbf{\theta}}\]</span></p>
-<h5 id="instead">Instead</h5>
-<p>Differentiable BEM has to differentiate through all operation:</p>
+</div><h3 id="issue-be-able-to-compute-the-gradient-through-the-entire-simulation-of-the-system.">Issue : Be able to compute the gradient through the entire simulation of the system.</h3>
+</div>
+</section>
+<section id="differentiable-physics-simulations" class="slide level2 centeredslide">
+<h2>Differentiable physics simulations</h2>
+<div class="columns fragment">
+<div class="column" style="width:40%;">
+<div title="Differentiable physics simulations" style="text-align:left; !important">
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Differentiable physics simulations</strong></p>
+</div>
+<div class="callout-content">
+<div id="fig">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="Images/diffSolver.png" class="quarto-figure quarto-figure-center" style="height:1.7in"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>Compute gradients of the physical process (and controls).</p>
 <ul>
-<li class="fragment">Green’s function and integrals: <span class="math inline">\(G(x,\xi)\)</span> , <span class="math inline">\(\nabla G(x,\xi)\)</span>, <span class="math inline">\(\iint G(x,\xi) dA\)</span></li>
-<li class="fragment">Iterative (direct) solvers (<span class="math inline">\(f(x,u)=0\)</span> ) and post-processing steps</li>
+<li class="fragment">Differentiable hydrodynamics numerical solver: <code>MarineHydro.jl</code>.</li>
+<li class="fragment">Useful in Wave energy converters (WEC) design optimization for maximum power capture.</li>
 </ul>
+</div><div class="column" style="width:60%;">
+<div id="fig">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="Images/AdjointOptimization.png" class="quarto-figure quarto-figure-center" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div></div>
+<!-- ::: {.callout title="" style="text-align:left;!important" .fragment}
+Case study: <code>Wave energy converters (WEC) </code>
+
+- Systems that convert wave energy into usable energy.
+- Coupled systems that include:
+  - Hydrodynamics, Controls, Economics etc
+- Design optimization of WECs is a complex problem.
+- **Goal**: Optimize the design of WECs to maximize energy capture.
+::: -->
+</section>
+<section id="marinehydro.jl---wave-model" class="slide level2">
+<h2>MarineHydro.jl - wave model</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li class="fragment"><p>Frequency domain boundary element method (BEM) solver for hydrodynamics.</p></li>
+<li class="fragment"><p>Supports reverse-mode automatic differentiation (aka backpropagation)</p></li>
+<li class="fragment"><p>Adjoint method for all linear solve is <code>automated</code> in <code>MarineHydro.jl</code>.</p></li>
+<li class="fragment"><p>100% Julia implementation.</p></li>
+<li class="fragment"><p>Open-source and extensible.</p></li>
+<li class="fragment"><p><strong>Key Benefits</strong>:</p>
+<ul>
+<li class="fragment"><strong>Design Optimization</strong>: Integrate into gradient based optimization.</li>
+<li class="fragment"><strong>Sensitivity Analysis</strong>: Understand how changes in inputs affect the simulation output.</li>
+</ul></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="Images/diffBEM.png" style="width:10in;height:5in"></p>
+<figcaption><strong>Figure</strong>: Architecture of MarineHydro.jl</figcaption>
+</figure>
+</div>
 </div></div>
 </section>
-<section id="differentiability-via-discrete-adjoint-method" class="slide level2 centeredslide">
-<h2>Differentiability via Discrete Adjoint Method</h2>
+<section id="comparison-with-finite-differences-and-analytical-gradients" class="slide level2 custom-dimensions">
+<h2>Comparison with Finite Differences and Analytical Gradients</h2>
+<div class="columns">
+<div class="column fragment" style="width:50%;">
+<p><img data-src="Images/fd_ad_A_w.png" style="width:80.0%"></p>
+</div><div class="column fragment" style="width:50%;">
+<p><img data-src="Images/FD_AD_B_omega.png" style="width:80.0%"></p>
+</div></div>
+<div class="columns">
+<div class="column fragment" style="width:50%;">
+<p><img data-src="Images/fd_ad_dmping_radius.png" style="width:80.0%"></p>
+</div><div class="column fragment" style="width:50%;">
+<p><img data-src="Images/analytical_ad_fd.png" style="width:80.0%"></p>
+</div></div>
+</section>
+<section id="diffferentiable-wave-to-wire-model-of-wecs" class="slide level2 centeredslide">
+<h2>Diffferentiable Wave to Wire model of WECs</h2>
+<h3 id="wave-to-wire-optimization">Wave to wire optimization</h3>
+<ul>
+<li class="fragment"><p>wave interaction to electrical power output</p></li>
+<li class="fragment"><p>Time domain modeling of the PTO systems and control strategies</p></li>
+<li class="fragment"><p>For every WEC design, optimal control strategy is computed.</p></li>
+<li class="fragment"><p>Need for a differentiable wave to wire model</p></li>
+<li class="fragment"><p>Adjoint method for the entire wave to wire model</p></li>
+</ul>
+</section>
+<section id="references-refs-" class="slide level2">
+<h2><strong>References</strong> {#refs}-</h2>
+<p><span class="citation" data-cites="foreman2024">Foreman (<a href="#/implicit-differentiation-through-solvers" role="doc-biblioref" onclick="">2024</a>)</span></p>
+</section>
+<section id="backup1-differentiability-via-discrete-adjoint-method" class="slide level2 centeredslide">
+<h2>Backup1: Differentiability via Discrete Adjoint Method</h2>
 <div class="columns">
 <div class="column" style="width:55%;">
 <div title="Constrained optimization">
@@ -573,7 +630,7 @@ D \frac{\partial \phi}{\partial \theta} = S \frac{\partial b}{\partial \theta} +
 <li class="fragment">This is the adjoint linear solve. The same <span class="math inline">\(D\)</span> matrix is used.</li>
 </ul>
 </section>
-<section id="implicit-differentiation-through-solvers" class="slide level2 incremental">
+<section id="implicit-differentiation-through-solvers" class="slide level2 incremental smaller scrollable">
 <h2>Implicit Differentiation through solvers</h2>
 <p>The gradient of <span class="math inline">\(J\)</span> with respect to <span class="math inline">\(\theta\)</span> is then expressed as: <span class="math display">\[
 \begin{equation}
@@ -589,93 +646,9 @@ D \frac{\partial \phi}{\partial \theta} = S \frac{\partial b}{\partial \theta} +
 <li class="fragment">Transfer function</li>
 <li class="fragment">Extends to iterative solvers (GMRES, etc.) and nonlinear solvers (Newton, etc.) as well.</li>
 </ul>
-</section>
-<section id="marinehydro.jl" class="slide level2">
-<h2>MarineHydro.jl</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
-<ul>
-<li class="fragment">supports reverse-mode automatic differentiation (aka backpropagation)</li>
-<li class="fragment">The adjoint method for all linear solve is <code>automated</code> in MarineHydro.jl.</li>
-<li class="fragment">GPU support (Matthieu!)</li>
-<li class="fragment">100% Julia implementation for hydrodynamics.</li>
-<li class="fragment"><ul>
-<li class="fragment"><ul>
-<li class="fragment">Capytaine for meshing and geometry</li>
-</ul></li>
-</ul></li>
-<li class="fragment"><ul>
-<li class="fragment"><ul>
-<li class="fragment">Finite difference for geometry</li>
-</ul></li>
-</ul></li>
-<li class="fragment"><strong>Key Benefits</strong>:
-<ul>
-<li class="fragment"><strong>Design Optimization</strong>: Integrate into gradient based optimization.</li>
-<li class="fragment"><strong>Sensitivity Analysis</strong>: Understand how changes in inputs affect the simulation output.</li>
-</ul></li>
-</ul>
-</div><div class="column" style="width:50%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="Images/diffBEM.png" style="width:10in;height:5in"></p>
-<figcaption><strong>Figure</strong>: Architecture of MarineHydro.jl</figcaption>
-</figure>
-</div>
-</div></div>
-</section>
-<section id="comparison-with-finite-differences-and-analytical-gradients" class="slide level2 custom-dimensions">
-<h2>Comparison with Finite Differences and Analytical Gradients</h2>
-<div class="columns">
-<div class="column fragment" style="width:50%;">
-<p><img data-src="Images/fd_ad_A_w.png" style="width:80.0%"></p>
-</div><div class="column fragment" style="width:50%;">
-<p><img data-src="Images/FD_AD_B_omega.png" style="width:80.0%"></p>
-</div></div>
-<div class="columns">
-<div class="column fragment" style="width:50%;">
-<p><img data-src="Images/fd_ad_dmping_radius.png" style="width:80.0%"></p>
-</div><div class="column fragment" style="width:50%;">
-<p><img data-src="Images/analytical_ad_fd.png" style="width:80.0%"></p>
-</div></div>
-</section>
-<section id="using-marinehydro.jl" class="slide level2">
-<h2>using <code>MarineHydro.jl</code></h2>
-<p>import your mesh (we use Capytaine)</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href=""></a><span class="im">using</span> <span class="bu">MarineHydro</span></span>
-<span id="cb1-2"><a href=""></a><span class="im">using</span> <span class="bu">LinearAlgebra</span> </span>
-<span id="cb1-3"><a href=""></a><span class="im">using</span> <span class="bu">PyCall</span></span>
-<span id="cb1-4"><a href=""></a>cpt <span class="op">=</span> <span class="fu">pyimport</span>(<span class="st">"capytaine"</span>)</span>
-<span id="cb1-5"><a href=""></a>radius <span class="op">=</span> <span class="fl">1.0</span> <span class="co">#fixed</span></span>
-<span id="cb1-6"><a href=""></a>resolution <span class="op">=</span> (<span class="fl">14</span>, <span class="fl">14</span>)</span>
-<span id="cb1-7"><a href=""></a>cptmesh <span class="op">=</span> cpt.<span class="fu">mesh_sphere</span>(name<span class="op">=</span><span class="st">"sphere"</span>, radius<span class="op">=</span>radius, center<span class="op">=</span>(<span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>), resolution<span class="op">=</span>resolution) </span>
-<span id="cb1-8"><a href=""></a>cptmesh.<span class="fu">keep_immersed_part</span>(inplace<span class="op">=</span><span class="cn">true</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Load the capytaine mesh and calculate the hydrodynamic coefficients.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb2-1"><a href=""></a><span class="co"># declare it Julia mesh</span></span>
-<span id="cb2-2"><a href=""></a>mesh <span class="op">=</span> <span class="fu">Mesh</span>(cptmesh)  </span>
-<span id="cb2-3"><a href=""></a>ω <span class="op">=</span> <span class="fl">1.03</span></span>
-<span id="cb2-4"><a href=""></a>ζ <span class="op">=</span> [<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">1</span>] <span class="co"># HEAVE: will be more verbose in future iteration. define it again even if defined in Capytaine.</span></span>
-<span id="cb2-5"><a href=""></a>F <span class="op">=</span> <span class="fu">DiffractionForce</span>(mesh,ω,ζ)</span>
-<span id="cb2-6"><a href=""></a>A,B <span class="op">=</span> <span class="fu">calculate_radiation_forces</span>(mesh,ζ,ω)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Calculate gradients of the hydrodynamic coefficients with respect to <span class="math inline">\(\omega\)</span></p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb3-1"><a href=""></a><span class="co"># differentiabilittiy </span></span>
-<span id="cb3-2"><a href=""></a><span class="im">using</span> <span class="bu">Zygote</span></span>
-<span id="cb3-3"><a href=""></a>A_w_grad, <span class="op">=</span> Zygote.<span class="fu">gradient</span>(w <span class="op">-&gt;</span> <span class="fu">calculate_radiation_forces</span>(mesh,ζ,w)[<span class="fl">1</span>],ω)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="ongoing-work" class="slide level2">
-<h2>Ongoing work</h2>
-<ul>
-<li class="fragment"><strong>GPU</strong>: GPU support for the adjoint method and all linear solves.</li>
-<li class="fragment"><strong>Geometry</strong>: Support for meshing in Julia</li>
-<li class="fragment"><strong>Hydrostatics</strong>: Support for hydrostatic analysis</li>
-</ul>
-</section>
-<section id="references-refs-" class="slide level2 smaller scrollable">
-<h2><strong>References</strong> {#refs}-</h2>
-<p><span class="citation" data-cites="foreman2024">Foreman (<a href="#/references-refs-" role="doc-biblioref" onclick="">2024</a>)</span></p>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
-<p><img src="sealab.png" style="height: 30px; float: right;"></p>
+<p><img src="Images/sealab.png" style="height: 30px; float: right;"></p>
 </div>
 </div>
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
