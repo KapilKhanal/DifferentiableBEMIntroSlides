@@ -42,8 +42,8 @@ title-slide-attributes:
 # {.title-slide .centeredslide background-iframe="https://saforem2.github.io/grid-worms-animation/" loading="lazy"}
 
 ::: {style="background-color: rgba(34, 34, 35, 0.75); border-radius: 10px; text-align:center; padding: 0px; padding-left: 1.5em; padding-right: 1.5em; max-width: min-content; min-width: max-content; margin-left: auto; margin-right: auto; padding-top: 0.2em; padding-bottom: 0.2em; line-height: 1.5em!important;"}
-<span style="color:#7EC8E3; font-size:1.11em; font-weight: bold;">Towards $\partial$ifferentiable engineering systems</span>  
-<span style="color:#7EC8E3; font-size:0.9em; font-weight: bold;">Optimizing Coupled Systems with Gradients</span>  
+<span style="color:#7EC8E3; font-size:1.11em; font-weight: bold;">Towards $\partial$ifferentiable Engineering Systems.</span>  
+<span style="color:#7EC8E3; font-size:0.9em; font-weight: bold;">Optimizing coupled systems with gradients</span>  
 [<br>&nbsp;]{style="padding-bottom: 0.5rem;"}  
 <span style="color:#66B2B2;"> Kapil Khanal (PhD Candidate)</span>  
 <span style="color:#66B2B2; font-size:0.9em;">SEA Lab, Cornell University</span>  
@@ -74,12 +74,15 @@ title-slide-attributes:
 ::: {.columns}
 ::: {.column width="100%"}
 <span class="green-text"> Can be coupled or uncoupled</span> 
- Numerical simulations or transformations on data through mathematical operations
+
+Numerical simulations of subsystems
+
+Transformations on data through mathematical operations
 :::
 
 ::: {.column width="110%"}
 <div id="fig" style="margin-top: 20px;">
-![](Images/coupled_uncoupled.png){fig-align="center" width="60%"} {.fragment}
+![](Images/coupled_uncoupled.png){fig-align="center" width="60%"} 
 </div>
 
 Both systems on large scale are optimized using  
@@ -95,7 +98,7 @@ Both systems on large scale are optimized using
 
 :::: {.columns}
 ::: {.column width="50%"}
-::: {.callout-note title="Optimization of the entire system $(\mathcal{S})$" style="text-align:left; !important"}
+::: {.callout-note title="Optimization of the entire system for renewable energy system $(\mathcal{S})$" style="text-align:left; !important"}
 The system can be formulated as:
 
 $$
@@ -117,10 +120,11 @@ Where:
 $$
 \mathcal{R} \text{ is the analysis residual of each subsystem.}
 $$
+for example, Hydrodynamics, Controls, Economics etc.
 :::
 :::
 ::: {.column width="50%"}
-#### Optimizer choice for renewable energy system
+#### Optimizer choice
 ::: {#fig}
 ![](Images/compare_lcoe_iterations.png){width=8in height=4.5in }
 :::
