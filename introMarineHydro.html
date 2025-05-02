@@ -364,18 +364,18 @@
 <ul>
 <li class="fragment"><a href="#/diffferentiable-wave-to-wire-model-of-wecs">Optimal Controls</a></li>
 </ul></li>
-<li class="fragment"><a href="#/sec-references">References</a></li>
+<li class="fragment"><a href="#/sec-references">Conclusion</a></li>
 <li class="fragment"><a href="#/sec-extras">Extras</a></li>
 </ol>
 </section>
 <section id="optimizing-large-systems" class="slide level2 centeredslide">
 <h2>Optimizing large systems</h2>
 <div class="columns">
-<div class="column" style="width:100%;">
+<div class="column" style="width:110%;">
 <p><span class="green-text"> Can be coupled or uncoupled</span></p>
 <p>Numerical simulations of subsystems</p>
 <p>Transformations on data through mathematical operations</p>
-</div><div class="column" style="width:110%;">
+</div><div class="column" style="width:100%;">
 <div id="fig" style="margin-top: 20px;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
@@ -383,12 +383,11 @@
 </figure>
 </div>
 </div>
-<p>Both systems on large scale are optimized using<br>
-<code>backpropagation (a.k.a adjoint method) and implicit differentiation</code>.</p>
+<p>Optimized using <code>backpropagation</code> (adjoint).</p>
 </div></div>
 </section>
-<section id="system-optimization" class="slide level2 centeredslide">
-<h2>System optimization</h2>
+<section id="physical-system-optimization" class="slide level2 centeredslide">
+<h2>Physical System Optimization</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
 <div title="Optimization of the entire system for renewable energy system $(\mathcal{S})$" style="text-align:left; !important">
@@ -531,6 +530,16 @@ Case study: <code>Wave energy converters (WEC) </code>
 <li class="fragment">For every WEC design, optimal control strategy is computed - nested optimization.</li>
 <li class="fragment">Need for a differentiable wave to wire model</li>
 <li class="fragment">Backpropagation through the inner optimization model</li>
+</ul>
+</section>
+<section id="conclusion" class="slide level2">
+<h2>Conclusion</h2>
+<p>So far I have shown:</p>
+<ul>
+<li class="fragment"><p>Differentiable hydrodynamic analysis using MarineHydro.jl</p></li>
+<li class="fragment"><p>Differentiable wave to wire model</p></li>
+<li class="fragment"><p>Differentiable optimization of coupled systems</p></li>
+<li class="fragment"><p>Next: Differentiable optimization of farm of WECs</p></li>
 </ul>
 </section>
 <section id="thank-you" class="slide level2 centeredslide">

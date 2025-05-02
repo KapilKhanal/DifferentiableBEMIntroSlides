@@ -65,14 +65,14 @@ title-slide-attributes:
     - - [MarineHydro.jl](#sec-marinehydro)
 3. [Differentiable wave to wire](#sec-codesign)
     - [Optimal Controls](#wave-to-wire-optimization)
-3. [References](#sec-references)
+3. [Conclusion](#sec-references)
 4. [Extras](#sec-extras)
 
 
 ## Optimizing large systems {.centeredslide}
 
 ::: {.columns}
-::: {.column width="100%"}
+::: {.column width="110%"}
 <span class="green-text"> Can be coupled or uncoupled</span> 
 
 Numerical simulations of subsystems
@@ -80,21 +80,18 @@ Numerical simulations of subsystems
 Transformations on data through mathematical operations
 :::
 
-::: {.column width="110%"}
+::: {.column width="100%"}
 <div id="fig" style="margin-top: 20px;">
 ![](Images/coupled_uncoupled.png){fig-align="center" width="60%"} 
 </div>
 
-Both systems on large scale are optimized using  
-<code>backpropagation (a.k.a adjoint method) and implicit differentiation</code>. 
-
-
+Optimized using  <code>backpropagation</code> (adjoint). 
 :::
 :::
 
 
 
-## System optimization {.centeredslide}
+## Physical System Optimization {.centeredslide}
 
 :::: {.columns}
 ::: {.column width="50%"}
@@ -219,6 +216,19 @@ Case study: <code>Wave energy converters (WEC) </code>
 - For every WEC design, optimal control strategy is computed - nested optimization.
 - Need for a differentiable wave to wire model 
 - Backpropagation through the inner optimization model
+
+## Conclusion
+So far I have shown:
+
+- Differentiable hydrodynamic analysis using MarineHydro.jl
+
+- Differentiable wave to wire model
+
+- Differentiable optimization of coupled systems
+
+- Next: Differentiable optimization of farm of WECs
+
+
 
 ## **Thank you**{.centeredslide} 
 
