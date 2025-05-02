@@ -58,37 +58,37 @@ title-slide-attributes:
 
 # Overview
 
-1. [Background: `{Coupled Systems}`](#large systems )
+1. [Background: `{Large scale systems}`](#large systems )
     - [Definition](#Coupled systems optimization)
     - [Physical system optimization using backpropagation](#automatic-differentiation)
 2. [Differentiable BEM](#sec-diffbem)
     - - [MarineHydro.jl](#sec-marinehydro)
 3. [Differentiable wave to wire](#sec-codesign)
-    - [Optimal Controls]
-    - [Results](#sec-results)
+    - [Optimal Controls](#wave-to-wire-optimization)
 3. [References](#sec-references)
 4. [Extras](#sec-extras)
 
 
-## Coupled and Uncoupled Systems {.centeredslide}
+## Optimizing large systems {.centeredslide}
 
 ::: {.columns}
 ::: {.column width="100%"}
-<span class="green-text"> **"Coupled” refers to mutually beneficial relationships** </span>
-
-- Where different physics interact together.
-- Usually contains many parameters to optimize.
-- Needs scalable analysis and optimization methods.
+<span class="green-text"> Can be coupled or uncoupled</span> 
+ Numerical simulations or transformations on data through mathematical operations
 :::
 
 ::: {.column width="110%"}
 <div id="fig" style="margin-top: 20px;">
-![](Images/coupled_uncoupled.png){fig-align="center" width="60%"}
+![](Images/coupled_uncoupled.png){fig-align="center" width="60%"} {.fragment}
 </div>
 
-Both systems on large scale are optimized using backpropagation (a.k.a adjoint methood).
+Both systems on large scale are optimized using  
+<code>backpropagation (a.k.a adjoint method) and implicit differentiation</code>. 
+
+
 :::
 :::
+
 
 
 ## System optimization {.centeredslide}
@@ -206,18 +206,32 @@ Case study: <code>Wave energy converters (WEC) </code>
 
 ## Diffferentiable Wave to Wire model of WECs {.centeredslide}
 ### Wave to wire optimization
--  wave interaction to electrical power output
-- Time domain modeling of the PTO systems and control strategies
-- For every WEC design, optimal control strategy is computed.
+
+<div id="fig">
+![](Images/wave_wire.png){fig-align="center" width="80%"}
+</div>
+
+-  Wave interaction to electrical power output (PTO systems and control strategies)
+- For every WEC design, optimal control strategy is computed - nested optimization.
 - Need for a differentiable wave to wire model 
+- Backpropagation through the inner optimization model
 
-- Adjoint method for the entire wave to wire model 
+## **Thank you**{.centeredslide} 
 
 
 
+::: {.callout-note title="Questions?" style="font-size: 1.8rem; solid #4CAF50; background-color: #F0F8FF;"}
+Thank you for your attention!
 
-## **References** {#refs}- 
-@foreman2024
+Feel free to reach out for any questions or discussions.
+
+**Kapil Khanal**
+
+**Email**: kk733@cornell.edu
+
+
+:::
+
 
 ## Backup1: Differentiability via Discrete Adjoint Method {.centeredslide}
 

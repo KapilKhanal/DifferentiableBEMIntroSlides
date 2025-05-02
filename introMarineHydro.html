@@ -28,27 +28,7 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
-    /* CSS for citations */
-    div.csl-bib-body { }
-    div.csl-entry {
-      clear: both;
-      margin-bottom: 0em;
-    }
-    .hanging-indent div.csl-entry {
-      margin-left:2em;
-      text-indent:-2em;
-    }
-    div.csl-left-margin {
-      min-width:2em;
-      float:left;
-    }
-    div.csl-right-inline {
-      margin-left:2em;
-      padding-left:1em;
-    }
-    div.csl-indent {
-      margin-left: 2em;
-    }  </style>
+  </style>
   <link rel="stylesheet" href="introMarineHydro_files/libs/revealjs/dist/theme/quarto.css">
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="callouts.css">
@@ -369,7 +349,7 @@
 <section id="overview" class="title-slide slide level1 center">
 <h1>Overview</h1>
 <ol type="1">
-<li class="fragment"><a href="#/large%20systems">Background: <code>{Coupled Systems}</code></a>
+<li class="fragment"><a href="#/large%20systems">Background: <code>{Large scale systems}</code></a>
 <ul>
 <li class="fragment"><a href="#/Coupled%20systems%20optimization">Definition</a></li>
 <li class="fragment"><a href="#/automatic-differentiation">Physical system optimization using backpropagation</a></li>
@@ -382,32 +362,23 @@
 </ul></li>
 <li class="fragment"><a href="#/sec-codesign">Differentiable wave to wire</a>
 <ul>
-<li class="fragment">[Optimal Controls]</li>
-<li class="fragment"><a href="#/sec-results">Results</a></li>
+<li class="fragment"><a href="#/diffferentiable-wave-to-wire-model-of-wecs">Optimal Controls</a></li>
 </ul></li>
 <li class="fragment"><a href="#/sec-references">References</a></li>
 <li class="fragment"><a href="#/sec-extras">Extras</a></li>
 </ol>
 </section>
-<section id="coupled-and-uncoupled-systems" class="slide level2 centeredslide">
-<h2>Coupled and Uncoupled Systems</h2>
+<section id="optimizing-large-systems" class="slide level2 centeredslide">
+<h2>Optimizing large systems</h2>
 <div class="columns">
 <div class="column" style="width:100%;">
-<p><span class="green-text"> <strong>“Coupled” refers to mutually beneficial relationships</strong> </span></p>
-<ul>
-<li class="fragment">Where different physics interact together.</li>
-<li class="fragment">Usually contains many parameters to optimize.</li>
-<li class="fragment">Needs scalable analysis and optimization methods.</li>
-</ul>
+<p><span class="green-text"> Can be coupled or uncoupled</span> Numerical simulations or transformations on data through mathematical operations</p>
 </div><div class="column" style="width:110%;">
 <div id="fig" style="margin-top: 20px;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="Images/coupled_uncoupled.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></p>
-</figure>
+<p><img data-src="Images/coupled_uncoupled.png" class="quarto-figure quarto-figure-center" style="width:60.0%"> {.fragment}</p>
 </div>
-</div>
-<p>Both systems on large scale are optimized using backpropagation (a.k.a adjoint methood).</p>
+<p>Both systems on large scale are optimized using<br>
+<code>backpropagation (a.k.a adjoint method) and implicit differentiation</code>.</p>
 </div></div>
 </section>
 <section id="system-optimization" class="slide level2 centeredslide">
@@ -542,17 +513,40 @@ Case study: <code>Wave energy converters (WEC) </code>
 <section id="diffferentiable-wave-to-wire-model-of-wecs" class="slide level2 centeredslide">
 <h2>Diffferentiable Wave to Wire model of WECs</h2>
 <h3 id="wave-to-wire-optimization">Wave to wire optimization</h3>
+<div id="fig">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="Images/wave_wire.png" class="quarto-figure quarto-figure-center" style="width:80.0%"></p>
+</figure>
+</div>
+</div>
 <ul>
-<li class="fragment"><p>wave interaction to electrical power output</p></li>
-<li class="fragment"><p>Time domain modeling of the PTO systems and control strategies</p></li>
-<li class="fragment"><p>For every WEC design, optimal control strategy is computed.</p></li>
-<li class="fragment"><p>Need for a differentiable wave to wire model</p></li>
-<li class="fragment"><p>Adjoint method for the entire wave to wire model</p></li>
+<li class="fragment">Wave interaction to electrical power output (PTO systems and control strategies)</li>
+<li class="fragment">For every WEC design, optimal control strategy is computed - nested optimization.</li>
+<li class="fragment">Need for a differentiable wave to wire model</li>
+<li class="fragment">Backpropagation through the inner optimization model</li>
 </ul>
 </section>
-<section id="references-refs-" class="slide level2">
-<h2><strong>References</strong> {#refs}-</h2>
-<p><span class="citation" data-cites="foreman2024">Foreman (<a href="#/implicit-differentiation-through-solvers" role="doc-biblioref" onclick="">2024</a>)</span></p>
+<section id="thank-you" class="slide level2 centeredslide">
+<h2><strong>Thank you</strong></h2>
+<div title="Questions?" style="font-size: 1.8rem; solid #4CAF50; background-color: #F0F8FF;">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Questions?</strong></p>
+</div>
+<div class="callout-content">
+<p>Thank you for your attention!</p>
+<p>Feel free to reach out for any questions or discussions.</p>
+<p><strong>Kapil Khanal</strong></p>
+<p><strong>Email</strong>: kk733@cornell.edu</p>
+</div>
+</div>
+</div>
+</div>
 </section>
 <section id="backup1-differentiability-via-discrete-adjoint-method" class="slide level2 centeredslide">
 <h2>Backup1: Differentiability via Discrete Adjoint Method</h2>
@@ -630,7 +624,7 @@ D \frac{\partial \phi}{\partial \theta} = S \frac{\partial b}{\partial \theta} +
 <li class="fragment">This is the adjoint linear solve. The same <span class="math inline">\(D\)</span> matrix is used.</li>
 </ul>
 </section>
-<section id="implicit-differentiation-through-solvers" class="slide level2 incremental smaller scrollable">
+<section id="implicit-differentiation-through-solvers" class="slide level2 incremental">
 <h2>Implicit Differentiation through solvers</h2>
 <p>The gradient of <span class="math inline">\(J\)</span> with respect to <span class="math inline">\(\theta\)</span> is then expressed as: <span class="math display">\[
 \begin{equation}
@@ -649,11 +643,6 @@ D \frac{\partial \phi}{\partial \theta} = S \frac{\partial b}{\partial \theta} +
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 <p><img src="Images/sealab.png" style="height: 30px; float: right;"></p>
-</div>
-</div>
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
-<div id="ref-foreman2024" class="csl-entry" role="listitem">
-Foreman, Sam. 2024. <span>“How to <span>Make</span> <span>Dope</span> <span>Slides</span>.”</span> August 13, 2024. <a href="https://samforeman.me/posts/dope-slides">https://samforeman.me/posts/dope-slides</a>.
 </div>
 </div>
 </section></section>
